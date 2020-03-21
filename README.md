@@ -1,4 +1,4 @@
-# Resource collection for COVID-19 hospital impact modelling
+# Resources for COVID-19 hospital impact modelling
 
 ## Some stuff I created that's in this repo
 
