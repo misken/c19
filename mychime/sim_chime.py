@@ -1,17 +1,20 @@
 import pandas as pd
 import numpy as np
+import math
 
 import sim_sir as sir
 
 
-def sim_chime(population, known_infections, known_cases,
-              market_share = 28, n_days = 120,
-              doubling_time = 6, relative_contact_rate = 0.25,
-              recovery_days = 14,
-              hosp_rate = 0.05, icu_rate = 0.02, vent_rate = 0.02,
-              hosp_los = 7, icu_los = 9, vent_los = 10):
+def sim_chime(scenario, population, known_infections, known_cases,
+              market_share=28, n_days=120,
+              doubling_time=6, relative_contact_rate=0.25,
+              recovery_days=14,
+              hosp_rate=0.05, icu_rate=0.02, vent_rate=0.02,
+              hosp_los=7, icu_los=9, vent_los=10,
+              pct_ped_vent=0.10):
     """
 
+    :param scenario:
     :param population:
     :param known_infections:
     :param known_cases:
@@ -26,8 +29,27 @@ def sim_chime(population, known_infections, known_cases,
     :param hosp_los:
     :param icu_los:
     :param vent_los:
+    :param pct_ped_vent:
     :return: projection, projection_admits, projection_census
     """
+
+    # Store all input parameters in a dictionary to return later
+    scenario_inputs = {'scenario': scenario,
+                       'population': population,
+                       'known_infections': known_infections,
+                       'known_cases': known_cases,
+                       'market_share': market_share,
+                       'n_days': n_days,
+                       'doubling_time': doubling_time,
+                       'relative_contact_rate': relative_contact_rate,
+                       'recovery_days': recovery_days,
+                       'hosp_rate': hosp_rate,
+                       'icu_rate': icu_rate,
+                       'vent_rate': vent_rate,
+                       'hosp_los': hosp_los,
+                       'icu_los': icu_los,
+                       'vent_los': vent_los}
+
 
     # Regional Population
     S = population
@@ -122,26 +144,36 @@ def sim_chime(population, known_infections, known_cases,
     # ------ Compute projected admits from projection results
 
     # New cases (computing lag 1 difference)
-    projection_admits = projection.iloc[:-1, :] - projection.shift(1)
+    projection_admits = (projection.iloc[:-1, :] - projection.shift(1)).apply(np.ceil)
     projection_admits[projection_admits < 0] = 0
+    projection_admits.loc[0, :] = 0
 
     plot_projection_days = n_days - 10
     projection_admits["day"] = range(projection_admits.shape[0])
 
     # ------ Compute census and other resource usage
 
-    projection_census = _census_table(projection_admits, hosp_los, icu_los, vent_los)
+    census_table, projection_census = _census_table(projection_admits,
+                                                    hosp_los, icu_los, vent_los)
 
+    # Add scenario info to result dataframes
+    projection['scenario'] = scenario
+    projection_admits['scenario'] = scenario
+    projection_census['scenario'] = scenario
+
+    projection_resources = _resource_table(projection_admits, projection_census,
+                                           pct_ped_vent)
     # Return projections
-    return projection, projection_admits, projection_census
+    return (projection, projection_admits, projection_census,
+            projection_resources, scenario_inputs)
 
 
-
-# The following function I left exactly as is from the UPenn model. Need
-# to dig into it in more detail to best understand how to incorporate
-# new resources. We might want to have a separate function that does
+# The following function I left as is from the UPenn model, except
+# now returns daily census version as well as every 7 day
+# version used in CHIME for the plot.
+# We might want to have a separate function that does
 # similar thing for any resources we add.
-def _census_table(projection_admits, hosp_los, icu_los, vent_los) -> pd.DataFrame:
+def _census_table(projection_admits, hosp_los, icu_los, vent_los):
     """ALOS for each category of COVID-19 case (total guesses)"""
 
     los_dict = {
@@ -158,6 +190,7 @@ def _census_table(projection_admits, hosp_los, icu_los, vent_los) -> pd.DataFram
         ).apply(np.ceil)
         census_dict[k] = census[k]
 
+
     census_df = pd.DataFrame(census_dict)
     census_df["day"] = census_df.index
     census_df = census_df[["day", "hosp", "icu", "vent"]]
@@ -167,6 +200,49 @@ def _census_table(projection_admits, hosp_los, icu_los, vent_los) -> pd.DataFram
     census_table.loc[0, :] = 0
     census_table = census_table.dropna().astype(int)
 
-    return census_table
+    # Modified following lines to convert NaN to 0 in first row of census_df
+    # and to return the full census_df along with the table that only contains
+    # every 7 days.
+    census_df.loc[0, :] = 0
+    census_df.fillna(0, inplace=True)
+    return census_table, census_df
 
+
+def _resource_table(projection_admits, projection_census, pct_ped_vent) -> pd.DataFrame:
+    """Use admissions, census, and base inputs to compute resource needs"""
+
+    # Copy the census projections to use as base for resource projections
+    projection_resources = projection_census.copy()
+
+    census_rename_dict = {
+        "hosp": 'hosp_census',
+        "icu": 'icu_census',
+        "vent": 'vent_census',
+    }
+
+    projection_resources = projection_resources.rename(census_rename_dict, axis='columns')
+    print(projection_resources)
+
+    dfs_to_concat = [projection_resources, projection_admits.iloc[:, 1:-1]]
+    projection_resources = pd.concat(dfs_to_concat, axis=1)
+
+    admit_rename_dict = {
+        "hosp": 'hosp_admit',
+        "icu": 'icu_admit',
+        "vent": 'vent_admit',
+    }
+    projection_resources = projection_resources.rename(admit_rename_dict, axis='columns')
+
+    # Computing number of pediatric and adult ventilators
+    projection_resources['vent_census_ped'] = projection_resources['vent_census'] * pct_ped_vent
+
+    projection_resources['vent_census_ped'] = \
+        projection_resources['vent_census_ped'].map(lambda x: math.ceil(x))
+
+    projection_resources['vent_census_adult'] = projection_resources['vent_census'] - projection_resources[
+        'vent_census_ped']
+
+    # Compute number of GPs needed - should this be based on census or admits?
+
+    return projection_resources
 

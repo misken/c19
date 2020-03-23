@@ -61,6 +61,19 @@ vent_rate = (
     st.sidebar.number_input("Ventilated %(total infections)", 0.0, 100.0, value=1.0, step=1.0, format="%f")
     / 100.0
 )
+# ----- START Added as demo on 2020-03-23
+# Default values are totally made up and are NOT real
+pct_ped_vent = (
+    st.sidebar.number_input("% of Ventilated that are peds", 0.0, 100.0, value=1.0, step=1.0, format="%f")
+    / 100.0
+)
+
+adm_per_gp = (
+    st.sidebar.number_input("Num admissions per general practitioner", 0.0, 20.0, value=10.0, step=1.0, format="%f")
+    / 100.0
+)
+# --- END of additions
+
 hosp_los = st.sidebar.number_input("Hospital Length of Stay", value=7, step=1, format="%i")
 icu_los = st.sidebar.number_input("ICU Length of Stay", value=9, step=1, format="%i")
 vent_los = st.sidebar.number_input("Vent Length of Stay", value=10, step=1, format="%i")
@@ -293,6 +306,9 @@ hosp = i * hosp_rate * BH_market_share
 icu = i * icu_rate * BH_market_share
 vent = i * vent_rate * BH_market_share
 
+
+
+
 days = np.array(range(0, n_days + 1))
 data_list = [days, hosp, icu, vent]
 data_dict = dict(zip(["day", "hosp", "icu", "vent"], data_list))
@@ -344,7 +360,7 @@ st.markdown(
     "Projected **census** of COVID-19 patients, accounting for arrivals and discharges at BH hospitals"
 )
 
-def _census_table(projection_admits, hosp_los, icu_los, vent_los) -> pd.DataFrame:
+def _census_table(projection_admits, hosp_los, icu_los, vent_los):
     """ALOS for each category of COVID-19 case (total guesses)"""
 
     los_dict = {
@@ -371,9 +387,48 @@ def _census_table(projection_admits, hosp_los, icu_los, vent_los) -> pd.DataFram
     census_table.loc[0, :] = 0
     census_table = census_table.dropna().astype(int)
 
-    return census_table
+    # Modified following lines to convert NaN to 0 in first row of census_df
+    # and to return the full census_df along with the table that only contains
+    # every 7 days.
+    census_df.loc[0, :] = 0
+    return census_table, census_df
 
-census_table = _census_table(projection_admits, hosp_los, icu_los, vent_los)
+census_table, projection_census = _census_table(projection_admits, hosp_los, icu_los, vent_los)
+
+
+# ---- START Added to demo on 2020-03-23
+def _resource_table(projection_admits, projection_census, pct_ped_vent, adm_per_gp) -> pd.DataFrame:
+    """Use admissions, census, and base inputs to compute resource needs"""
+
+    # Copy the census projections to use as base for resource projections
+    projection_resources = projection_census.copy()
+
+    census_rename_dict = {
+        "hosp": 'hosp_census',
+        "icu": 'icu_census',
+        "vent": 'vent_census',
+    }
+
+    projection_resources = projection_resources.rename(census_rename_dict, axis='columns')
+    print(projection_resources)
+
+    dfs_to_concat = [projection_resources, projection_admits.iloc[:, 1:]]
+    projection_resources = pd.concat(dfs_to_concat, axis=1)
+
+    admit_rename_dict = {
+        "hosp": 'hosp_admit',
+        "icu": 'icu_admit',
+        "vent": 'vent_admit',
+    }
+    projection_resources = projection_resources.rename(admit_rename_dict, axis='columns')
+
+    # Computing number of pediatric and adult ventilators
+    projection_resources['vent_census_ped'] = projection_resources['vent_census'] * pct_ped_vent
+    projection_resources['vent_census_adult'] = projection_resources['vent_census'] - projection_resources['vent_census_ped']
+
+    # Compute number of GPs needed - should this be based on census or admits?
+
+    return projection_resources
 
 def admitted_patients_chart(census: pd.DataFrame) -> alt.Chart:
     """docstring"""
