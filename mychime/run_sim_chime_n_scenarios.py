@@ -2,26 +2,25 @@ import pandas as pd
 import numpy as np
 import math
 
-import sim_chime as chime
+from datetime import datetime
 
-# Population parameters
-wayne = 1778396
-oakland = 1248141
-macomb = 867502
-genesee = 414657
-washtenaw = 326058
-saintclair = 158313
-monroe = 153436
-lapeer = 79723
-S_default = wayne + oakland + macomb + genesee + washtenaw + saintclair + monroe + lapeer
+from pandas import DataFrame
 
-known_infections = 787  # update daily
-known_cases = 457  # update daily
+from penn_chime.parameters import Parameters
+from penn_chime.models import SimSirModel
+from penn_chime.utils import RateLos
 
-market_share = 28.0
-#
 
-# ------ SIR and resource model input parameter base values
+# ---- Base input values
+
+
+
+known_infections = 1581  # update daily
+known_cases = 250  # update daily
+
+market_share = 0.28  # 0 - 1.0
+
+# -- SIR and resource model input parameter base values
 
 # Number of days to run model
 n_days = 120
@@ -29,18 +28,18 @@ n_days = 120
 # Currently Hospitalized COVID-19 Patients
 current_hosp = known_cases
 # Doubling time before social distancing (days)
-doubling_time = 6
+doubling_time = 4
 # Social distancing (% reduction in social contact)
-relative_contact_rate = 0.25
+relative_contact_rate = 0.50
 # Recovery days
 recovery_days = 14
 
 # Hospitalization %(total infections)
-hosp_rate = 0.05
+hosp_rate = 0.025
 # ICU %(total infections)
-icu_rate = 0.02
+icu_rate = 0.0075
 # Ventilated %(total infections)
-vent_rate = 0.01
+vent_rate = 0.005
 # Hospital average Length of Stay (days)
 hosp_los = 7
 # ICU average Length of Stay (days)
@@ -48,27 +47,24 @@ icu_los = 9
 # Vent average Length of Stay (days)
 vent_los = 10
 
-# New resource related parameters
-pct_ped_vent = 0.10
+p = Parameters(
+    current_hospitalized=current_hosp,
+    doubling_time=doubling_time,
+    known_infected=known_infections,
+    market_share=market_share,
+    n_days=n_days,
+    relative_contact_rate=relative_contact_rate,
+    susceptible=S_default,
 
+    hospitalized=RateLos(hosp_rate, hosp_los),
+    icu=RateLos(icu_rate, icu_los),
+    ventilated=RateLos(vent_rate, vent_los),
+)
 
 # ---- Run one scenario
 
 scenario = 'base_test'
-proj, proj_admits, proj_census, proj_resources, scenario_inputs = \
-    chime.sim_chime(scenario, S_default, known_infections, known_cases,
-                    market_share, n_days,
-                    doubling_time, relative_contact_rate,
-                    recovery_days,
-                    hosp_rate, icu_rate, vent_rate,
-                    hosp_los, icu_los, vent_los,
-                    pct_ped_vent)
 
-print(proj)
-print(proj_admits)
-print(proj_census)
-print(proj_resources)
-print(scenario_inputs)
 
 
 # ---- Explore range of a single input
@@ -88,20 +84,31 @@ results_list = []
 
 for sdpct in soc_dists:
     scenario = 'test_soc_{:.0f}'.format(100 * sdpct)
-    proj, proj_admits, proj_census, proj_resources, scenario_inputs = \
-        chime.sim_chime(scenario, S_default, known_infections, known_cases,
-                        market_share, n_days,
-                        doubling_time, relative_contact_rate,
-                        recovery_days,
-                        hosp_rate, icu_rate, vent_rate,
-                        hosp_los, icu_los, vent_los,
-                        pct_ped_vent)
 
+    # Update the parameters for this scenario
+    p.relative_contact_rate = sdpct
+
+    # Run the model
+    m = SimSirModel(p)
+
+    # Get the output dfs
+
+
+    # Get key input/output variables
+
+    intrinsic_growth_rate = m.intrinsic_growth_rate
+    gamma = m.gamma  # Recovery rate
+    beta = m.beta  # Contact rate
+
+    # r_t is r_0 after distancing
+    r_t = m.r_t
+    r_naught = m.r_naught
+    doubling_time_t = m.doubling_time_t
     results = {
-        'projection': proj,
-        'projection_admits': proj_admits,
-        'projection_census': proj_census,
-        'projection_resources': proj_resources,
+        'raw_sir_df': m.raw_df,
+        'dispositions_df': m.dispositions_df,
+        'admits_df': m.admits_df,
+        'census_df': m.census_df,
         'scenario_inputs': scenario_inputs
     }
 

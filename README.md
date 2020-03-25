@@ -12,7 +12,8 @@
 ## CHIME project
 
 * [Online hospital impact simulator](https://penn-chime.phl.io/)
-* [https://github.com/pennsignals/chime](https://github.com/pennsignals/chime)
+* [https://github.com/CodeForPhilly/chime](https://github.com/CodeForPhilly/chime)
+* [CHIME docs](https://code-for-philly.gitbook.io/chime/)
 * [Announcing CHIME blog post](http://predictivehealthcare.pennmedicine.org/2020/03/14/accouncing-chime.html)
 
 ## Johns Hopkins projects
@@ -23,6 +24,13 @@
     - [Dashboard](https://www.arcgis.com/apps/opsdashboard/index.html#/bda7594740fd40299423467b48e9ecf6)
     - links to Lancet article and many data sources
 * [CSSE dept at JHU](https://systems.jhu.edu/)
+
+## Articles, blog posts, vids
+
+* https://medium.com/swlh/a-war-footing-surfing-the-curve-f5ffe6134e37
+* https://www.probabilitymanagement.org/blog/2020/3/19/the-flaw-of-averages-in-flattening-the-curve
+
+* https://www.probabilitymanagement.org/blog/2020/1/30/a-combination-of-coronavirus-and-the-flaw-of-averages-can-drive-you-nuts
 
 ## Kaggle data, kernels, challenges
 

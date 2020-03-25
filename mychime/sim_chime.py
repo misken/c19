@@ -48,7 +48,8 @@ def sim_chime(scenario, population, known_infections, known_cases,
                        'vent_rate': vent_rate,
                        'hosp_los': hosp_los,
                        'icu_los': icu_los,
-                       'vent_los': vent_los}
+                       'vent_los': vent_los,
+                       'pct_ped_vent': pct_ped_vent}
 
 
     # Regional Population
