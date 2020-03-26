@@ -12,8 +12,7 @@ Additional contributors include:
 
 MIT License
 
-Copyright (c) 2020 Mark Isken
-
+Copyright (c) 2020 Mark Isken<br/><br/>
 Copyright (c) 2020 The Trustees of the University of Pennsylvania
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
