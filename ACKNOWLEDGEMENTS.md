@@ -5,6 +5,10 @@ GitHub site is https://github.com/CodeForPhilly/chime.
 
 The CHIME project is under the MIT License (https://opensource.org/licenses/MIT) as is this project.
 
+Additional contributors include:
+
+* Bill Ferris
+
 
 MIT License
 
