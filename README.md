@@ -34,6 +34,16 @@ The hospital based analysts we are trying to help with this work are all on Wind
 
 https://github.com/misken/c19/tree/master/mychime/docs
 
+### Jupyter notebook version of early CHIME model
+
+**NOTE: This was based on a very early version of the CHIME model. Nevertheless,
+the comments might still be useful to someone trying to understand the basic
+logic of the model.**
+
+I've added tons of code comments and other descriptive text throughout the notebook to help others understand exactly how this works and how we might adapt it for our use.
+
+https://github.com/misken/c19/blob/master/chime_earlyversion_annotated.ipynb
+
 ### Jupyter notebook for downloading COVID-19 time series data
 
 Downloads latest time series data from https://github.com/CSSEGISandData/COVID-19.
