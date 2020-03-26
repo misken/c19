@@ -112,7 +112,80 @@ def parse_args():
     return parser.parse_args()
 
 
-def sim_chime(p, scenario):
+def sim_chime(scenario: str, params: Parameters = None,
+              current_hospitalized: int = None,
+              doubling_time: float = None,
+              known_infected: int = None,
+              relative_contact_rate: float = None,
+              susceptible: int = None,
+              hospitalized: RateLos = None,
+              icu: RateLos = None,
+              ventilated: RateLos = None,
+              market_share: float = None,
+              n_days: int = None,
+              recovery_days: float = None,
+              ):
+    """
+    Run one chime simulation.
+
+    If `params` is not None, then it is used to initialize all parameters. Any
+    parameter values set to something other than None in the following
+    optional args will update that parameter value. If `params` is None, then
+    all additional args must be other than None.
+
+    :param scenario:
+    :param params:
+    :param current_hospitalized:
+    :param doubling_time:
+    :param known_infected:
+    :param relative_contact_rate:
+    :param susceptible:
+    :param hospitalized:
+    :param icu:
+    :param ventilated:
+    :param market_share:
+    :param n_days:
+    :param recovery_days:
+    :return:
+    """
+
+    if params is not None:
+        params_dict = vars(params)
+    else:
+        params_dict = {"current_hospitalized": None,
+                      "doubling_time": None,
+                      "known_infected": None,
+                      "relative_contact_rate": None,
+                      "susceptible": None,
+                      "hospitalized": None,
+                      "icu": None,
+                      "ventilated": None,
+                      "market_share": None,
+                      "n_days": None,
+                      "recovery_days": None,
+                      }
+
+    # Check for parameter updates passed
+    vals_passed = {key: value for (key, value) in vars().items()
+                   if key not in ['scenario', 'params']}
+
+    for key, value in vals_passed.items():
+        if value is not None:
+            params_dict[key] = value
+            
+    # Create Parameters object
+    p = Parameters(
+        current_hospitalized=params_dict['current_hospitalized'],
+        doubling_time=params_dict['doubling_time'],
+        known_infected=params_dict['known_infected'],
+        market_share=params_dict['market_share'],
+        n_days=params_dict['n_days'],
+        relative_contact_rate=params_dict['relative_contact_rate'],
+        susceptible=params_dict['susceptible'],
+        hospitalized=params_dict['hospitalized'],
+        icu=params_dict['icu'],
+        ventilated=params_dict['ventilated'],
+    )
 
     input_params_dict = vars(p)
 
@@ -205,11 +278,12 @@ if __name__ == "__main__":
             n_days=a.n_days,
             relative_contact_rate=a.relative_contact_rate,
             susceptible=a.susceptible,
-            hospitalized=RateLos(a.hosp_rate, a.hosp_los),
-            ventilated=RateLos(a.vent_rate, a.vent_los),
+            hospitalized=RateLos(a.hospitalized_rate, a.hospitalized_los),
+            icu=RateLos(a.icu_rate, a.icu_los),
+            ventilated=RateLos(a.ventilated_rate, a.ventilated_los),
         )
 
-    results = sim_chime(p, scenario)
+    results = sim_chime(scenario, p)
 
     if not a.quiet:
         print("Scenario: {}\n".format(results['scenario_str']))
