@@ -13,7 +13,7 @@ project:
 
 ## Some stuff I created that's in this repo
 
-### ]run_sim_chime_scenario.py](https://github.com/misken/c19/blob/master/mychime/run_sim_chime_scenario.py)
+### run_sim_chime_scenario.py
 
 We adapted the CLI application in the CHIME project (https://github.com/CodeForPhilly/chime).
 
@@ -24,6 +24,8 @@ We adapted the CLI application in the CHIME project (https://github.com/CodeForP
 containing parameter and variable values.
 - also writes out csvs of the dataframes and json for the dictionaries
 
+https://github.com/misken/c19/blob/master/mychime/run_sim_chime_scenario.py
+
 ### Cheat sheets for installing CHIME locally
 
 The docs for CHIME are great. I created this to help folks with limited
@@ -32,14 +34,16 @@ The hospital based analysts we are trying to help with this work are all on Wind
 
 https://github.com/misken/c19/tree/master/mychime/docs
 
-### [get_c19_data_alpha.ipynb](https://github.com/misken/c19/blob/master/get_c19_data_alpha.ipynb)
+### Jupyter notebook for downloading COVID-19 time series data
 
-Downloads lates time series data from https://github.com/CSSEGISandData/COVID-19.
+Downloads latest time series data from https://github.com/CSSEGISandData/COVID-19.
 
 - does a bunch of data wrangling to create global as well as US datasets (at county and state level) that are amenable to analysis
 - all dataframes are created both in semi-wide and long forms. The semi-wide forms have been date melted but contain separate columns for confirmed, deaths, and recovered. The long forms are measure melted in addition to date melted.
 - csvs explorted to path of your choosing
 - basic line plot at bottom for demo.
+
+https://github.com/misken/c19/blob/master/get_c19_data_alpha.ipynb
 
 ## Johns Hopkins projects
 
