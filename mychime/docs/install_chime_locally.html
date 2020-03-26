@@ -1,0 +1,25 @@
+<h1 id="getting-chime-running-locally-for-development">Getting chime running locally for development</h1>
+<p>Writing this not knowing people level of comfort/familiarity with Anaconda Python distro, using virtual conda environments, running things from shells. So, if you know all this, it will be really easy.</p>
+<p>Clone or download the source from its GitHub site at https://github.com/pennsignals/chime into directory of your choosing. If you do a <code>git clone https://github.com/CodeForPhilly/chime.git</code> you’ll end up with a new directory called chime. That’s the working directory. If instead, you just download the zip file from GitHub, you’ll get a file named <code>chime-master.zip</code>. After you extract it, that folder will be the working directory. It will be called chime-master but you can obviously change it.</p>
+<p>Instructions for getting the app running locally so that you can modify code are at: <a href="https://codeforphilly.github.io/chime/contributing/app-dev.html" class="uri">https://codeforphilly.github.io/chime/contributing/app-dev.html</a></p>
+<p>I’m just walking through the instructions as I’m getting this running on my machine.</p>
+<p>I’m using Anaconda Python distro and I use conda for package management. I’m using Ubuntu but all of this stuff is cross-platform.</p>
+<ul>
+<li>Open an Anaconda prompt (on Windows) or a terminal shell in Linux/Mac.</li>
+<li>Navigate to the <code>chime</code> diectory.</li>
+<li>Now, following the instructions above, we’ll create a new conda virtual environment, install Streamlit and launch the app locally.</li>
+</ul>
+<p>Type these commands in your terminal.</p>
+<pre><code>conda env create -f environment.yml
+conda activate chime
+pip install streamlit
+streamlit run src/app.py</code></pre>
+<p>A few notes about the above.</p>
+<ul>
+<li>On Windows you do <code>conda activate chime</code> even though the instructions say use <code>source activate chime</code>. The former works on both Linux and Windows, the latter doesn’t work on Windows.</li>
+<li>The <code>environment.yml</code> file is a YAML file that has the “recipe” for creating the necessary conda virtual env needed by Streamlit.</li>
+<li>After the last command that actually launches the app, your terminal window will show you to URLs. Just copy the network URL and paste into a new browser tab.</li>
+<li>Voila, the app is running.</li>
+<li>The terminal window is running the necessary services. Just leave it open while you are playing with the app.</li>
+<li>Use CTRL+C within the terminal to kill the app.</li>
+</ul>
