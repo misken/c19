@@ -2,7 +2,7 @@
 
 This repo is just a place store some notes and code related to c19
 hospital impact modeling. Some of the work is based on the amazing CHIME
-project: 
+project. 
 
 ## CHIME project
 
