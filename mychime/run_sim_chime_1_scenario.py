@@ -1,165 +1,223 @@
-import pandas as pd
-import numpy as np
-import math
-import json
-import pprint
+"""
+Command line interface.
+"""
+
+from argparse import (
+    Action,
+    ArgumentParser,
+)
 
 from datetime import datetime
 
-from pandas import DataFrame
-
-from penn_chime.settings import DEFAULTS as d
+from penn_chime.settings import DEFAULTS
 from penn_chime.parameters import Parameters
 from penn_chime.models import SimSirModel
 from penn_chime.utils import RateLos
 
-# Default values (uses values in settings.py) - you can modify them below this section
-susceptible_default = d.region.susceptible
-current_hospitalized_default = d.current_hospitalized
-doubling_time_default = d.doubling_time
-known_infected_default = d.known_infected
-relative_contact_rate_default = d.relative_contact_rate
+import json
 
-hosp_rate_default = d.hospitalized.rate
-icu_rate_default = d.icu.rate
-vent_rate_default = d.ventilated.rate
+class FromFile(Action):
+    """From File."""
 
-hosp_los_default = d.hospitalized.length_of_stay
-icu_los_default = d.icu.length_of_stay
-vent_los_default = d.ventilated.length_of_stay
-
-market_share_default = d.market_share
-n_days_default = d.n_days
-recovery_days_default = d.recovery_days
+    def __call__(self, parser, namespace, values, option_string=None):
+        with values as f:
+            parser.parse_args(f.read().split(), namespace)
 
 
-# ------ CHIME model input parameter base values (YOU CAN SET OR CHANGE THESE)
+def validator(cast, min_value, max_value):
+    """Validator."""
 
-scenario = 'base_test'
-output_path = './output/'
+    def validate(string):
+        """Validate."""
+        value = cast(string)
+        if min_value is not None:
+            assert value >= min_value
+        if max_value is not None:
+            assert value <= max_value
+        return value
 
-# Regional population
-susceptible = susceptible_default
+    return validate
 
-# Number of days to run model
-n_days = n_days_default
 
-# Known infected in region (# update daily)
-#   (only used to compute detection rate, doesn't affect projections)
-known_infected = known_infected_default
+def parse_args():
+    """Parse args."""
+    parser = ArgumentParser(description="CHIME-SEMI")
 
-# Currently Hospitalized COVID-19 Patients (# update daily)
-current_hospitalized = current_hospitalized_default
+    parser.add_argument("--file", type=open, action=FromFile)
+    parser.add_argument("--use-defaults", action='store_true',
+                        help="If True, overrides --file and other args (default=False")
+    parser.add_argument(
+        "--output-path", type=str, default="", help="location for output file writing",
+    )
+    parser.add_argument(
+        "--scenario", type=str, default=datetime.now().strftime("%Y.%m.%d.%H.%M."),
+        help="Prepended to output filenames."
+    )
+    parser.add_argument("--quiet", action='store_true',
+                        help="If True, suppresses output messages (default=False")
 
-# Doubling time before social distancing (days)
-doubling_time = doubling_time_default
-# Social distancing (% reduction in social contact)
-relative_contact_rate = relative_contact_rate_default
-# Recovery days
-recovery_days = recovery_days_default
+    for arg, cast, min_value, max_value, help in (
+        (
+            "--current-hospitalized",
+            int,
+            0,
+            None,
+            "Currently Hospitalized COVID-19 Patients (>= 0)",
+        ),
+        (
+            "--doubling-time",
+            float,
+            0.0,
+            None,
+            "Doubling time before social distancing (days)",
+        ),
+        ("--hospitalized-los", int, 0, None, "Hospitalized Length of Stay (days)"),
+        (
+            "--hospitalized-rate",
+            float,
+            0.00001,
+            1.0,
+            "Hospitalized Rate: 0.00001 - 1.0",
+        ),
+        ("--icu-los", int, 0, None, "ICU Length of Stay (days)"),
+        ("--icu-rate", float, 0.0, 1.0, "ICU Rate: 0.0 - 1.0"),
+        (
+            "--known-infected",
+            int,
+            0,
+            None,
+            "Currently Known Regional Infections (>=0) (only used to compute detection rate - does not change projections)",
+        ),
+        (
+            "--market_share",
+            float,
+            0.00001,
+            1.0,
+            "Hospital Market Share (0.00001 - 1.0)",
+        ),
+        ("--n-days", int, 0, None, "Nuber of days to project >= 0"),
+        (
+            "--relative-contact-rate",
+            float,
+            0.0,
+            1.0,
+            "Social Distancing Reduction Rate: 0.0 - 1.0",
+        ),
+        ("--susceptible", int, 1, None, "Regional Population >= 1"),
+        ("--ventilated-los", int, 0, None, "Hospitalized Length of Stay (days)"),
+        ("--ventilated-rate", float, 0.0, 1.0, "Ventilated Rate: 0.0 - 1.0"),
+    ):
+        parser.add_argument(arg, type=validator(cast, min_value, max_value))
+    return parser.parse_args()
 
-# Hospitalization %(total infections) (values in 0.0-1.0)
-hosp_rate = hosp_rate_default
-# ICU %(total infections) (values in 0.0-1.0)
-icu_rate = icu_rate_default
-# Ventilated %(total infections) (values in 0.0-1.0)
-vent_rate = vent_rate_default
 
-# Hospital average Length of Stay (int days)
-hosp_los = hosp_los_default
-# ICU average Length of Stay (int days)
-icu_los = icu_los_default
-# Vent average Length of Stay (int days)
-vent_los = vent_los_default
+def sim_chime(p, scenario):
 
-# Market share
-market_share = market_share_default  # (values in 0.0-1.0)
+    input_params_dict = vars(p)
 
-# Create penn_chime parameter object
+    # Run the model
+    m = SimSirModel(p)
 
-p = Parameters(
-    current_hospitalized=current_hospitalized,
-    doubling_time=doubling_time,
-    known_infected=known_infected,
-    market_share=market_share,
-    n_days=n_days,
-    relative_contact_rate=relative_contact_rate,
-    susceptible=susceptible,
+    # Get the output dfs
+    raw_sir_df = m.raw_df
+    dispositions_df = m.dispositions_df
+    admits_df = m.admits_df
+    census_df = m.census_df
 
-    hospitalized=RateLos(hosp_rate, hosp_los),
-    icu=RateLos(icu_rate, icu_los),
-    ventilated=RateLos(vent_rate, vent_los),
-)
+    # Get key input/output variables
+    intrinsic_growth_rate = m.intrinsic_growth_rate
+    gamma = m.gamma     # Recovery rate
+    beta = m.beta       # Contact rate
 
-input_params_dict = vars(p)
+    # r_t is r_0 after distancing
+    r_t = m.r_t
+    r_naught = m.r_naught
+    doubling_time_t = m.doubling_time_t
 
-# ---- Run one scenario
+    intermediate_variables = {
+        "intrinsic_growth_rate": intrinsic_growth_rate,
+        "gamma": gamma,
+        "beta": beta,
+        "r_naught": r_naught,
+        "r_t": r_t,
+        "doubling_time_t": doubling_time_t,
+    }
 
-# Run the model
-m = SimSirModel(p)
+    results = {
+        'scenario_str': scenario,
+        'input_params_dict': input_params_dict,
+        'intermediate_variables_dict': intermediate_variables,
+        'raw_sir_df': m.raw_df,
+        'dispositions_df': m.dispositions_df,
+        'admits_df': m.admits_df,
+        'census_df': m.census_df,
+    }
+    return results
 
-# Get the output dfs
-raw_sir_df = m.raw_df
-dispositions_df = m.dispositions_df
-admits_df = m.admits_df
-census_df = m.census_df
 
-# Get key input/output variables
+def write_results(rslt, scen, out):
 
-intrinsic_growth_rate = m.intrinsic_growth_rate
-gamma = m.gamma # Recovery rate
-beta = m.beta   # Contact rate
+    # Results dataframes
+    for df, name in (
+        (rslt["raw_sir_df"], "raw_sir"),
+        (rslt["dispositions_df"], "dispositions"),
+        (rslt["admits_df"], "admits"),
+        (rslt["census_df"], "census"),
+    ):
+        df.to_csv(out + scen + '_' + name + ".csv", index=False)
 
-# r_t is r_0 after distancing
-r_t = m.r_t
-r_naught = m.r_naught
-doubling_time_t = m.doubling_time_t
+    # Variable dictionaries
+    with open(out + scen + "_inputs.json") as f:
+        json.dumps(rslt['input_params_dict'], f)
 
-intermediate_variables = {
-    "intrinsic_growth_rate": intrinsic_growth_rate,
-    "gamma": gamma,
-    "beta": beta,
-    "r_naught": r_naught,
-    "r_t": r_t,
-    "doubling_time_t": doubling_time_t,
-}
+    with open(out + scen + "_key_vars.json") as f:
+        json.dumps(rslt['intermediate_variables_dict'], f)
 
-results = {
-    'scenario_str': scenario,
-    'input_params_dict': input_params_dict,
-    'intermediate_variables_dict': intermediate_variables,
-    'raw_sir_df': m.raw_df,
-    'dispositions_df': m.dispositions_df,
-    'admits_df': m.admits_df,
-    'census_df': m.census_df,
-}
 
-print("\nInput parameters")
-print("{}".format(50 * '-'))
-#print(param_dict)
-print(json.dumps(param_dict, indent=4, sort_keys=False))
-# pprint.pprint(param_dict)
+if __name__ == "__main__":
+    a = parse_args()
+    scenario = a.scenario
+    output_path = a.output_path
 
-print("\nIntermediate variables")
-print("{}".format(50 * '-'))
-#print(intermediate_variables)
-print(json.dumps(intermediate_variables, indent=4, sort_keys=False))
-# pprint.pprint(intermediate_variables)
-print("\n")
+    if a.use_defaults:
+        p = Parameters(
+            current_hospitalized=DEFAULTS.current_hospitalized,
+            doubling_time=DEFAULTS.doubling_time,
+            known_infected=DEFAULTS.known_infected,
+            market_share=DEFAULTS.market_share,
+            n_days=DEFAULTS.n_days,
+            relative_contact_rate=DEFAULTS.relative_contact_rate,
+            susceptible=DEFAULTS.susceptible,
+            hospitalized=RateLos(DEFAULTS.hosp_rate, DEFAULTS.hosp_los),
+            icu=RateLos(DEFAULTS.icu_rate, DEFAULTS.icu_los),
+            ventilated=RateLos(DEFAULTS.vent_rate, DEFAULTS.vent_los),
+        )
+    else:
+        p = Parameters(
+            current_hospitalized=a.current_hospitalized,
+            doubling_time=a.doubling_time,
+            known_infected=a.known_infected,
+            market_share=a.market_share,
+            n_days=a.n_days,
+            relative_contact_rate=a.relative_contact_rate,
+            susceptible=a.susceptible,
+            hospitalized=RateLos(a.hosp_rate, a.hosp_los),
+            ventilated=RateLos(a.vent_rate, a.vent_los),
+        )
 
-# Intermediate model variables
-print('Intrinsic growth rate: {:.3f}'.format(intrinsic_growth_rate))
-print('gamma (recovery rate): {:.3f}'.format(gamma))
-print('beta (contact rate): {:.3f}'.format(beta))
-print('Basic reproductive rate: {:.3f}'.format(r_naught))
-print('Adjusted reproductive rate (after social distancing): {:.3f}'.format(r_t))
-print('Adjusted doubling time in days (after social distancing): {:.0f}'.format(doubling_time_t))
+    results = sim_chime(p, scenario)
 
-# Results dataframes
-raw_sir_df.to_csv("{}raw_sir_{}.csv".format(output_path, scenario), index=False)
-dispositions_df.to_csv("{}dispositions_{}.csv".format(output_path, scenario), index=False)
-admits_df.to_csv("{}admits_{}.csv".format(output_path, scenario), index=False)
-census_df.to_csv("{}census_{}.csv".format(output_path, scenario), index=False)
+    if not a.quiet:
+        print("Scenario: {}\n".format(results['scenario_str']))
+        print("\nInput parameters")
+        print("{}".format(50 * '-'))
+        print(json.dumps(results['param_dict'], indent=4, sort_keys=False))
 
+        print("\nIntermediate variables")
+        print("{}".format(50 * '-'))
+        print(json.dumps(results['intermediate_variables_dict'], indent=4, sort_keys=False))
+        print("\n")
+
+    write_results(results, output_path)
 
 

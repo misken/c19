@@ -1,5 +1,9 @@
 # Resources for COVID-19 hospital impact modelling
 
+This repo is just a place store some notes and code related to c19
+hospital impact modeling. Much of the work is based on the amazing CHIME
+project which has 
+
 ## Some stuff I created that's in this repo
 
 * [get_c19_data_alpha.ipynb](https://github.com/misken/c19/blob/master/get_c19_data_alpha.ipynb)
