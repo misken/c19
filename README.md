@@ -2,7 +2,8 @@
 
 This repo is just a place store some notes and code related to c19
 hospital impact modeling. Some of the work is based on the amazing CHIME
-project. 
+project done by the folks at [UPenn's Predictive Healthcare group](http://predictivehealthcare.pennmedicine.org/) and
+the [CodeForPhilly CHIME project](https://codeforphilly.org/projects/chime). 
 
 ## CHIME project
 
