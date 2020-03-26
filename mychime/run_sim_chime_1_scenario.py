@@ -16,6 +16,7 @@ from penn_chime.utils import RateLos
 
 import json
 
+
 class FromFile(Action):
     """From File."""
 
@@ -167,11 +168,11 @@ def write_results(rslt, scen, out):
         df.to_csv(out + scen + '_' + name + ".csv", index=False)
 
     # Variable dictionaries
-    with open(out + scen + "_inputs.json") as f:
-        json.dumps(rslt['input_params_dict'], f)
+    with open(out + scen + "_inputs.json", "w") as f:
+        json.dump(rslt['input_params_dict'], f)
 
-    with open(out + scen + "_key_vars.json") as f:
-        json.dumps(rslt['intermediate_variables_dict'], f)
+    with open(out + scen + "_key_vars.json", "w") as f:
+        json.dump(rslt['intermediate_variables_dict'], f)
 
 
 if __name__ == "__main__":
@@ -187,10 +188,13 @@ if __name__ == "__main__":
             market_share=DEFAULTS.market_share,
             n_days=DEFAULTS.n_days,
             relative_contact_rate=DEFAULTS.relative_contact_rate,
-            susceptible=DEFAULTS.susceptible,
-            hospitalized=RateLos(DEFAULTS.hosp_rate, DEFAULTS.hosp_los),
-            icu=RateLos(DEFAULTS.icu_rate, DEFAULTS.icu_los),
-            ventilated=RateLos(DEFAULTS.vent_rate, DEFAULTS.vent_los),
+            susceptible=DEFAULTS.region.susceptible,
+            hospitalized=RateLos(DEFAULTS.hospitalized.rate,
+                                 DEFAULTS.hospitalized.length_of_stay),
+            icu=RateLos(DEFAULTS.icu.rate,
+                        DEFAULTS.icu.length_of_stay),
+            ventilated=RateLos(DEFAULTS.ventilated.rate,
+                               DEFAULTS.ventilated.length_of_stay),
         )
     else:
         p = Parameters(
@@ -211,13 +215,13 @@ if __name__ == "__main__":
         print("Scenario: {}\n".format(results['scenario_str']))
         print("\nInput parameters")
         print("{}".format(50 * '-'))
-        print(json.dumps(results['param_dict'], indent=4, sort_keys=False))
+        print(json.dumps(results['input_params_dict'], indent=4, sort_keys=False))
 
         print("\nIntermediate variables")
         print("{}".format(50 * '-'))
         print(json.dumps(results['intermediate_variables_dict'], indent=4, sort_keys=False))
         print("\n")
 
-    write_results(results, output_path)
+    write_results(results, scenario, output_path)
 
 
