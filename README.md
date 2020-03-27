@@ -14,6 +14,27 @@ the [CodeForPhilly CHIME project](https://codeforphilly.org/projects/chime).
 
 ## Some stuff I created that's in this repo
 
+### Capacity driven census and admission adjustments to chime model
+
+Woke up in the middle of the night and an idea came to me for adjusting census and admissions. Thought about it, couldn't sleep and figured I'd get my rough ideas down in writing.
+
+Basic idea is that underlying epidemic has its dynamics that will play out almost independent of resources. But for capacity constrained resources it seems like there are three phases. Let's just use hospital beds as the example resource.
+
+#### growth phase - haven't hit capacity yet
+
+In this phase, we have the "zero census" problem with the underlying model. But if we are in growth phase, should be easy to just solve for t* < t0 in the basic exponential growth equation to "reconstruct" the admission history and use that along with LOS to compute census for the period [t*, t0] and thus have a better estimate of starting census at t0 as well as decent approximation of the mix of how far along those patients are in there stay to better model them leaving - as opposed to assuming all patients at t0 just started there stay, which causes a weird census spike at start of model projections.
+
+#### flat phase - at capacity
+
+At this stage, no matter how many admits predicting by underlying SIR model, we have our max admission rate, A* and max census C*. We will stay in this state until the underlying SIR model has admission rate A < A*. So, resource use is flat.
+
+#### decay phase
+
+When A < A*, the underlying growth rate in the epidemic must be slowing and now, we can use A to compute census in normal way.
+
+I'm going to try to hack a procedure together uses standard outputs from the current chime model to implement these ideas. If things look good, we can float our approach to the chime team for that thoughts and potential adoption. It would likely require user to input guesstimate of capacity for each resource being modelled.
+
+
 ### run_sim_chime_scenario.py
 
 We adapted the CLI application in the CHIME project (https://github.com/CodeForPhilly/chime).
