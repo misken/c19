@@ -46,7 +46,7 @@ death rates, and resource use rates.
 
 When $A \lt A^{*}$, the underlying growth rate in the epidemic must be slowing and now, we can use $A$ to compute census in normal way.
 
-I'm going to try to hack a procedure together uses standard outputs from the current chime model to implement these ideas. It would likely require user to input guesstimate of capacity for each resource being modelled.
+I'm going to try to put a procedure together that uses standard outputs from the current chime model to implement these ideas. It would likely require user to input capacity for each resource being modelled (will just start with beds).
 
 
 ### run_sim_chime_scenario.py
@@ -102,6 +102,7 @@ https://github.com/misken/c19/blob/master/get_c19_data_alpha.ipynb
 
 ## Articles, blog posts, vids
 
+* [Coronavirus modelers factor in new public health risk: Accusations their work is a hoax](https://www.washingtonpost.com/health/2020/03/27/coronavirus-models-politized-trump/)
 * [A War Footing: Surfing the Curve](https://medium.com/swlh/a-war-footing-surfing-the-curve-f5ffe6134e37)
 * [The Flaw of Averages in Flattening the Curve](https://www.probabilitymanagement.org/blog/2020/3/19/the-flaw-of-averages-in-flattening-the-curve)
 * [A combination of coronavirus and the flaw of averages can drive you nuts](https://www.probabilitymanagement.org/blog/2020/1/30/a-combination-of-coronavirus-and-the-flaw-of-averages-can-drive-you-nuts)
