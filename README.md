@@ -20,6 +20,11 @@ Woke up in the middle of the night and an idea came to me for adjusting census a
 
 Basic idea is that underlying epidemic has its dynamics that will play out almost independent of resources. But for capacity constrained resources it seems like there are three phases during the early growth stage of the virus. Let's just use hospital beds as the example resource.
 
+Hacked around in Excel so I could see what I was doing and this appears to make some sense. Talking
+it through with a few colleagues and then Pythonizing it.
+
+See 'model' sheet in [explore_census_adj.xlsx](https://github.com/misken/c19/blob/master/explore_census_adj.xlsx).
+
 #### growth phase - haven't hit capacity yet
 
 In this phase, we have the "zero census" problem with the underlying model. But if we are in growth phase, should be easy to just solve for t* < t0 in the basic exponential growth equation to "reconstruct" the admission history and use that along with LOS to compute census for the period [t*, t0] and thus have a better estimate of starting census at t0 as well as decent approximation of the mix of how far along those patients are in there stay to better model them leaving - as opposed to assuming all patients at t0 just started there stay, which causes a weird census spike at start of model projections.
