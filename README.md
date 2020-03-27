@@ -16,9 +16,9 @@ the [CodeForPhilly CHIME project](https://codeforphilly.org/projects/chime).
 
 ### Capacity driven census and admission adjustments to chime model
 
-Woke up in the middle of the night and an idea came to me for adjusting census and admissions. Thought about it, couldn't sleep and figured I'd get my rough ideas down in writing.
+Woke up in the middle of the night and an idea came to me for adjusting census and admission sduring **early stages** of virus spread to deal with census at time 0 problem. Thought about it, couldn't sleep and figured I'd get my rough ideas down in writing.
 
-Basic idea is that underlying epidemic has its dynamics that will play out almost independent of resources. But for capacity constrained resources it seems like there are three phases. Let's just use hospital beds as the example resource.
+Basic idea is that underlying epidemic has its dynamics that will play out almost independent of resources. But for capacity constrained resources it seems like there are three phases during the early growth stage of the virus. Let's just use hospital beds as the example resource.
 
 #### growth phase - haven't hit capacity yet
 
