@@ -22,7 +22,7 @@ Basic idea is that underlying epidemic has its dynamics that will play out almos
 
 #### growth phase - haven't hit capacity yet and epidemic in exponential growth phase
 
-In this phase, we have the "zero census" problem with the underlying model. But if we are in growth phase, should be easy to just solve for t* < t0 in the basic exponential growth equation to "reconstruct" the admission history and use that along with LOS to compute census for the period [t*, t0] and thus have a better estimate of starting census at t0 as well as decent approximation of the mix of how far along those patients are in there stay to better model them leaving - as opposed to assuming all patients at t0 just started there stay, which causes a weird census spike at start of model projections.
+In this phase, we have the "zero census" problem with the underlying model. But if we are in growth phase, should be easy to just solve for $t_{0}^{*} \lt t_0$ in the basic exponential growth equation to "reconstruct" the admission history and use that along with LOS to compute census for the period $(t_{0}^{*}, t_0)$ and thus have a better estimate of starting census at $t_0$ as well as decent approximation of the mix of how far along those patients are in there stay to better model them leaving - as opposed to assuming all patients at $t_0$ just started there stay, which causes a weird census spike at start of model projections.
 
 A complication is that the virus grew at intrinsic growth rate for a while and then
 when social distancing started, grew at implied growth rate.
@@ -38,11 +38,13 @@ See 'model' sheet in [explore_census_adj.xlsx](https://github.com/misken/c19/blo
 I'm guessing we are going to hit capacity constraints well before epidemic passes inflection point
 in the standard logistic model of its exponential spread and then eventual slowing growth.
 
-At this stage, no matter how many admits predicting by underlying SIR model, we have our max admission rate, A* and max census C*. We will stay in this state until the underlying SIR model has admission rate A < A*. So, resource use is flat.
+At this stage, no matter how many admits predicting by underlying SIR model, we have our max admission rate, $A^{*}$ and max census $C^{*}$. We will stay in this state until the underlying SIR model has admission rate $A \lt A^{*}$. So, resource use is flat, though there will be much adaptive behavior
+by hospitals as they cope with insufficient resources which will likely affect recovery rates,
+death rates, and resource use rates.
 
 #### decay phase
 
-When A < A*, the underlying growth rate in the epidemic must be slowing and now, we can use A to compute census in normal way.
+When $A \lt A^{*}$, the underlying growth rate in the epidemic must be slowing and now, we can use $A$ to compute census in normal way.
 
 I'm going to try to hack a procedure together uses standard outputs from the current chime model to implement these ideas. It would likely require user to input guesstimate of capacity for each resource being modelled.
 
