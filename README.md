@@ -20,7 +20,7 @@ Woke up in the middle of the night and an idea came to me for adjusting census a
 
 Basic idea is that underlying epidemic has its dynamics that will play out almost independent of resources. But for capacity constrained resources it seems like there are three phases during the early growth stage of the virus. Let's just use hospital beds as the example resource.
 
-#### growth phase - haven't hit capacity yet
+#### growth phase - haven't hit capacity yet and epidemic in exponential growth phase
 
 In this phase, we have the "zero census" problem with the underlying model. But if we are in growth phase, should be easy to just solve for t* < t0 in the basic exponential growth equation to "reconstruct" the admission history and use that along with LOS to compute census for the period [t*, t0] and thus have a better estimate of starting census at t0 as well as decent approximation of the mix of how far along those patients are in there stay to better model them leaving - as opposed to assuming all patients at t0 just started there stay, which causes a weird census spike at start of model projections.
 
@@ -33,6 +33,9 @@ it through with a few colleagues and then Pythonizing it.
 See 'model' sheet in [explore_census_adj.xlsx](https://github.com/misken/c19/blob/master/explore_census_adj.xlsx).
 
 #### flat phase - at capacity
+
+I'm guessing we are going to hit capacity constraints well before epidemic passes inflection point
+in the standard logistic model of it's eventual slowing growth.
 
 At this stage, no matter how many admits predicting by underlying SIR model, we have our max admission rate, A* and max census C*. We will stay in this state until the underlying SIR model has admission rate A < A*. So, resource use is flat.
 
