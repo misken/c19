@@ -35,7 +35,7 @@ See 'model' sheet in [explore_census_adj.xlsx](https://github.com/misken/c19/blo
 #### flat phase - at capacity
 
 I'm guessing we are going to hit capacity constraints well before epidemic passes inflection point
-in the standard logistic model of it's eventual slowing growth.
+in the standard logistic model of its exponential spread and then eventual slowing growth.
 
 At this stage, no matter how many admits predicting by underlying SIR model, we have our max admission rate, A* and max census C*. We will stay in this state until the underlying SIR model has admission rate A < A*. So, resource use is flat.
 
