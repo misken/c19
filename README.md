@@ -16,9 +16,9 @@ the [CodeForPhilly CHIME project](https://codeforphilly.org/projects/chime).
 
 ### Capacity driven census and admission adjustments to chime model
 
-Woke up in the middle of the night and an idea came to me for adjusting census and admission sduring **early stages** of virus spread to deal with census at time 0 problem. Thought about it, couldn't sleep and figured I'd get my rough ideas down in writing.
+Had idea for adjusting census and admission sduring **early stages** of virus spread to deal with census at time 0 problem. 
 
-Basic idea is that underlying epidemic has its dynamics that will play out almost independent of resources. But for capacity constrained resources it seems like there are three phases during the early growth stage of the virus. Let's just use hospital beds as the example resource.
+Basic idea is that underlying epidemic has its dynamics that will play out almost independent of resources. But for capacity constrained resources it seems like there are a few phases during the early growth stage and then later stages of the virus. Let's just use hospital beds as the example resource.
 
 #### growth phase - haven't hit capacity yet and epidemic in exponential growth phase
 
@@ -28,7 +28,8 @@ A complication is that the virus grew at intrinsic growth rate for a while and t
 when social distancing started, grew at implied growth rate.
 
 Hacked around in Excel so I could see what I was doing and this appears to make some sense for this phase. Talking
-it through with a few colleagues and then Pythonizing it.
+it through with a few colleagues and then Pythonizing it as a post-processing tool that can be used
+with standard CHIME output and as few as possible new user inputs.
 
 See 'model' sheet in [explore_census_adj.xlsx](https://github.com/misken/c19/blob/master/explore_census_adj.xlsx).
 
@@ -43,7 +44,7 @@ At this stage, no matter how many admits predicting by underlying SIR model, we 
 
 When A < A*, the underlying growth rate in the epidemic must be slowing and now, we can use A to compute census in normal way.
 
-I'm going to try to hack a procedure together uses standard outputs from the current chime model to implement these ideas. If things look good, we can float our approach to the chime team for that thoughts and potential adoption. It would likely require user to input guesstimate of capacity for each resource being modelled.
+I'm going to try to hack a procedure together uses standard outputs from the current chime model to implement these ideas. It would likely require user to input guesstimate of capacity for each resource being modelled.
 
 
 ### run_sim_chime_scenario.py
