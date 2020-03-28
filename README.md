@@ -14,7 +14,7 @@ the [CodeForPhilly CHIME project](https://codeforphilly.org/projects/chime).
 
 ## Some stuff I created that's in this repo
 
-### Capacity driven census and admission adjustments to chime model
+### Capacity driven census and admission adjustments to CHIME model
 
 Had idea for adjusting census and admission sduring **early stages** of virus spread to deal with census at time 0 problem. 
 
@@ -45,6 +45,8 @@ death rates, and resource use rates.
 #### decay phase
 
 When $A \lt A^{*}$, the underlying growth rate in the epidemic must be slowing and now, we can use $A$ to compute census in normal way.
+
+### Plan
 
 I'm going to try to put a procedure together that uses standard outputs from the current chime model to implement these ideas. It would likely require user to input capacity for each resource being modelled (will just start with beds).
 
@@ -102,6 +104,7 @@ https://github.com/misken/c19/blob/master/get_c19_data_alpha.ipynb
 
 ## Articles, blog posts, vids
 
+* [IHME - COVID-19 Projections](https://covid19.healthdata.org/projections) - paper describing methodology is [here](http://www.healthdata.org/research-article/forecasting-covid-19-impact-hospital-bed-days-icu-days-ventilator-days-and-deaths)
 * [Coronavirus modelers factor in new public health risk: Accusations their work is a hoax](https://www.washingtonpost.com/health/2020/03/27/coronavirus-models-politized-trump/)
 * [A War Footing: Surfing the Curve](https://medium.com/swlh/a-war-footing-surfing-the-curve-f5ffe6134e37)
 * [The Flaw of Averages in Flattening the Curve](https://www.probabilitymanagement.org/blog/2020/3/19/the-flaw-of-averages-in-flattening-the-curve)
