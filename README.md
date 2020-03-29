@@ -24,8 +24,16 @@ Basic idea is that underlying epidemic has its dynamics that will play out almos
 
 In this phase, we have the "zero census" problem with the underlying model. But if we are in growth phase, should be easy to just solve for $t_{0}^{*} \lt t_0$ in the basic exponential growth equation to "reconstruct" the admission history and use that along with LOS to compute census for the period $(t_{0}^{*}, t_0)$ and thus have a better estimate of starting census at $t_0$ as well as decent approximation of the mix of how far along those patients are in there stay to better model them leaving - as opposed to assuming all patients at $t_0$ just started there stay, which causes a weird census spike at start of model projections.
 
+**NOTE (2020-03-29)** Looks like Issue [#255](https://github.com/CodeForPhilly/chime/issues/255) is going to address this and go live on Monday, 2020-03-30. Implemented solution is to:
+
+* have user enter day of first covid admit (in addition to current number in hospital)
+* use brute force line search to find doubling time that minimizes squared error loss between actual and >  predicted census at current time.
+
+Approach makes sense and has benefit of only one additional user input. Hospitals will be happy. 
+
 A complication is that the virus grew at intrinsic growth rate for a while and then
-when social distancing started, grew at implied growth rate.
+when social distancing started, grew at implied growth rate. Hmm, I wonder if this
+matters? 
 
 Hacked around in Excel so I could see what I was doing and this appears to make some sense for this phase. Talking
 it through with a few colleagues and then Pythonizing it as a post-processing tool that can be used
