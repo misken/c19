@@ -84,14 +84,16 @@ https://github.com/misken/c19/blob/master/chime_earlyversion_annotated.ipynb
 
 ### Jupyter notebook for downloading COVID-19 time series data
 
-Downloads latest time series data from https://github.com/CSSEGISandData/COVID-19.
+Downloads latest time series data from https://github.com/nytimes/covid-19-data
+
+NOTE: Using NY Times data for now while some issues getting ironed out with the JH data
 
 - does a bunch of data wrangling to create global as well as US datasets (at county and state level) that are amenable to analysis
 - all dataframes are created both in semi-wide and long forms. The semi-wide forms have been date melted but contain separate columns for confirmed, deaths, and recovered. The long forms are measure melted in addition to date melted.
 - csvs explorted to path of your choosing
 - basic line plot at bottom for demo.
 
-https://github.com/misken/c19/blob/master/get_c19_data_alpha.ipynb
+https://github.com/misken/c19/blob/master/get_c19_data_nytimes.ipynb
 
 ## Johns Hopkins projects
 
