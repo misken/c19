@@ -27,7 +27,7 @@ In this phase, we have the "zero census" problem with the underlying model. But 
 **NOTE (2020-03-29)** Looks like Issue [#255](https://github.com/CodeForPhilly/chime/issues/255) is going to address this and go live on Monday, 2020-03-30. Implemented solution is to:
 
 * have user enter day of first covid admit (in addition to current number in hospital)
-* use brute force line search to find doubling time that minimizes squared error loss between actual and >  predicted census at current time.
+* use brute force line search to find doubling time that minimizes squared error loss between actual and  predicted census at current time.
 
 Approach makes sense and has benefit of only one additional user input. Hospitals will be happy. 
 
