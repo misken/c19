@@ -14,6 +14,14 @@ the [CodeForPhilly CHIME project](https://codeforphilly.org/projects/chime).
 
 ## Some stuff I created that's in this repo
 
+### Model calibration/validation for new (2020-03-30) CHIME model
+
+This version deals with the census at time 0 problem by doing something similar to the idea sketched below. It minimizes squared error loss between actual and predicted census to find implied doubling time (given first actual admit date) or implied first admit (given a doubling time). 
+
+So, I took our actual admits (from 2/20/2020 to a few days ago) and just fit an exponential growth model, got the implied growth rate and implied doubling time. Plotted actival admits vs predicted (just using simple exp growth model) and got very nice fit. Then used implied doubling time of 3.61 in CHIME model and got spot on match with the exponential fit to admits and thus, to the actual admits. Super happy to see this!
+
+You can see the results in this notebook: [model_calibration_validation.ipynb](https://github.com/misken/c19/blob/master/mychime/model_calibration_validation.ipynb)
+
 ### Capacity driven census and admission adjustments to CHIME model
 
 Had idea for adjusting census and admission sduring **early stages** of virus spread to deal with census at time 0 problem. 
