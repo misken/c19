@@ -21,9 +21,9 @@ from argparse import (
 from datetime import datetime
 
 from penn_chime.settings import DEFAULTS
-from penn_chime.parameters import Parameters
+from penn_chime.parameters import Parameters, RateDays
 from penn_chime.models import SimSirModel
-from penn_chime.utils import RateLos
+
 
 import numpy as np
 import pandas as pd
