@@ -20,7 +20,7 @@ This version deals with the census at time 0 problem by doing something similar 
 
 So, I took our actual admits (from 2/20/2020 to a few days ago) and just fit an exponential growth model, got the implied growth rate and implied doubling time. Plotted actual admits vs predicted (just using simple exp growth model) and got very nice fit. Then used implied doubling time of 3.61 in CHIME model and got spot on match with the exponential fit to admits and thus, to the actual admits. Super happy to see this!
 
-You can see the results in this notebook: [model_calibration_validation.ipynb](https://github.com/misken/c19/blob/master/mychime/model_calibration_validation.ipynb)
+You can see the results in this notebook: [model_calibration_validation.ipynb](https://github.com/misken/c19/blob/master/mychime/calibration_validation/model_calibration_validation.ipynb)
 
 ### Capacity driven census and admission adjustments to CHIME model
 
@@ -47,7 +47,7 @@ Hacked around in Excel so I could see what I was doing and this appears to make 
 it through with a few colleagues and then Pythonizing it as a post-processing tool that can be used
 with standard CHIME output and as few as possible new user inputs.
 
-See 'model' sheet in [explore_census_adj.xlsx](https://github.com/misken/c19/blob/master/explore_census_adj.xlsx).
+See 'model' sheet in [explore_census_adj.xlsx](https://github.com/misken/c19/blob/master/mychime/modeling/explore_census_adj.xlsx).
 
 #### flat phase - at capacity
 
@@ -67,18 +67,17 @@ When $A \lt A^{*}$, the underlying growth rate in the epidemic must be slowing a
 I'm going to try to put a procedure together that uses standard outputs from the current chime model to implement these ideas. It would likely require user to input capacity for each resource being modelled (will just start with beds).
 
 
-### run_sim_chime_scenario.py
+### sim_chime_scenario_runner.py (WIP)
 
 We adapted the CLI application in the CHIME project (https://github.com/CodeForPhilly/chime).
 
 - added scenario and output_path parameters (separate from main Parameters object)
-- added ability to use an input file, command line args, or DEFAULTS to instantiate model
+- uses standard CHIME input config file
 - added ability to import this and call sim_chime() function from external apps so that we can run tons of scenarios over ranges of input parameters
 - output is a dictionary of the standard CHIME dataframes as well as dictionaries
 containing parameter and variable values.
 - also writes out csvs of the dataframes and json for the dictionaries
 
-https://github.com/misken/c19/blob/master/mychime/run_sim_chime_scenario.py
 
 ### Cheat sheets for installing CHIME locally
 
@@ -96,7 +95,7 @@ logic of the model.**
 
 I've added tons of code comments and other descriptive text throughout the notebook to help others understand exactly how this works and how we might adapt it for our use.
 
-https://github.com/misken/c19/blob/master/chime_earlyversion_annotated.ipynb
+https://github.com/misken/c19/blob/master/mychime/chime_earlyversion_annotated.ipynb
 
 ### Jupyter notebook for downloading COVID-19 time series data
 
