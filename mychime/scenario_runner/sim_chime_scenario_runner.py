@@ -52,19 +52,44 @@ def parse_args():
 
     return parser.parse_args()
 
+def create_params_from_file(file):
+    """
+    Create CHIME Parameters object from input config file
 
-def sim_chime(scenario: str, p: Parameters
-              ):
+    :param file:
+    :return:
+    """
+    # Update sys.arg so we can call cli.parse_args()
+    sys.argv = [sys.argv[0], '--file', file]
+
+    a = cli.parse_args()
+
+    p = Parameters(
+        current_hospitalized=a.current_hospitalized,
+        date_first_hospitalized=a.date_first_hospitalized,
+        doubling_time=a.doubling_time,
+        infectious_days=a.infectious_days,
+        market_share=a.market_share,
+        n_days=a.n_days,
+        relative_contact_rate=a.relative_contact_rate,
+        population=a.population,
+
+        hospitalized=Disposition(a.hospitalized_rate, a.hospitalized_days),
+        icu=Disposition(a.icu_rate, a.icu_days),
+        ventilated=Disposition(a.ventilated_rate, a.ventilated_days),
+    )
+
+    return p
+
+
+
+def sim_chime(scenario: str, p: Parameters):
     """
     Run one chime simulation.
 
-    If `params` is not None, then it is used to initialize all parameters. Any
-    parameter values set to something other than None in the following
-    optional args will update that parameter value. If `params` is None, then
-    all additional args must be other than None.
-
     :param scenario:
     :param p:
+    :return: Tuple (model, results dictionary)
     """
 
     input_params_dict = vars(p)
@@ -74,7 +99,7 @@ def sim_chime(scenario: str, p: Parameters
 
     # Gather results
     results = gather_sim_results(m, scenario, input_params_dict)
-    return results
+    return m, results
 
 
 def write_results(results, scenario, path):
@@ -97,7 +122,7 @@ def write_results(results, scenario, path):
 
     # Variable dictionaries
     with open(path + scenario + "_inputs.json", "w") as f:
-        json.dump(results['input_params_dict'], f)
+        json.dump(results['input_params_dict'], f, default=str)
 
     with open(path + scenario + "_key_vars.json", "w") as f:
         json.dump(results['intermediate_variables_dict'], f)
@@ -135,7 +160,7 @@ def gather_sim_results(m, scenario, input_params_dict):
         'scenario': scenario,
         'input_params_dict': input_params_dict,
         'intermediate_variables_dict': intermediate_variables,
-        'raw_sir_df': m.raw_df,
+        'sim_sir_w_date_df': m.sim_sir_w_date_df,
         'dispositions_df': m.dispositions_df,
         'admits_df': m.admits_df,
         'census_df': m.census_df,
@@ -224,13 +249,13 @@ if __name__ == "__main__":
 
     if my_args.scenarios is None:
         # Just running one scenario
-        results = sim_chime(scenario, p)
+        m, results = sim_chime(scenario, p)
 
         if not my_args.quiet:
             print("Scenario: {}\n".format(results['scenario']))
             print("\nInput parameters")
             print("{}".format(50 * '-'))
-            print(json.dumps(results['input_params_dict'], indent=4, sort_keys=False))
+            print(json.dumps(results['input_params_dict'], indent=4, sort_keys=False, default=str))
 
             print("\nIntermediate variables")
             print("{}".format(50 * '-'))
@@ -248,7 +273,7 @@ if __name__ == "__main__":
                 print("Scenario: {}\n".format(results['scenario_str']))
                 print("\nInput parameters")
                 print("{}".format(50 * '-'))
-                print(json.dumps(results['input_params_dict'], indent=4, sort_keys=False))
+                print(json.dumps(results['input_params_dict'], indent=4, sort_keys=False, default=str))
 
                 print("\nIntermediate variables")
                 print("{}".format(50 * '-'))
