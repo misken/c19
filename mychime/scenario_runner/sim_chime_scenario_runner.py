@@ -119,7 +119,7 @@ def write_results(results, scenario, path):
 
     # Results dataframes
     for df, name in (
-        (results["sim_sir_w_date_df"], "sim_sir_w_date_df"),
+        (results["sim_sir_w_date_df"], "sim_sir_w_date"),
         (results["dispositions_df"], "dispositions"),
         (results["admits_df"], "admits"),
         (results["census_df"], "census"),

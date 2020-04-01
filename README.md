@@ -14,7 +14,7 @@ A simple Python module for working with the penn_chime model. More details below
 * Location in repo: https://github.com/misken/c19/tree/master/mychime/scenario_runner
 * A Jupyter notebook demo showing its use: [using_sim_chime_scenario_runner.ipynb](https://github.com/misken/c19/blob/master/mychime/scenario_runner/using_sim_chime_scenario_runner.ipynb)
 
-Note: Assumes that you've pip installed `penn_chime` per https://github.com/CodeForPhilly/chime/pull/249 from a local clone of the chime repo
+Note: Assumes that you've pip installed `penn_chime` per https://github.com/CodeForPhilly/chime/pull/249 from a local clone of the chime repohttps://github.com/misken/c19
 
 ## CHIME project
 
