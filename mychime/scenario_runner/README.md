@@ -1,5 +1,7 @@
 ## sim_chime_scenario_runner
 
+Here's a Jupyter notebook showing its use: [using_sim_chime_scenario_runner.ipynb](https://github.com/misken/c19/blob/master/mychime/scenario_runner/using_sim_chime_scenario_runner.ipynb)
+
 A simple Python module for working with the penn_chime model
 that: 
 
@@ -29,4 +31,4 @@ to make my code easy to maintain if CHIME changes.
 - the main simulation function signature is `sim_chime(scenario: str, p: Parameters):`
 - `sim_chime()` returns a tuple containing the model object and the results dictionary described above.
 
-Here's a Jupyter notebook showing its use: [using_sim_chime_scenario_runner.ipynb](https://github.com/misken/c19/blob/master/mychime/scenario_runner/using_sim_chime_scenario_runner.ipynb)
+
