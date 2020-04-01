@@ -1,15 +1,15 @@
 ## sim_chime_scenario_runner
 
-I wanted to have a simple Python module for working with the penn_chime model
+A simple Python module for working with the penn_chime model
 that: 
 
-* allowed running simulations from command line (like cli.py in penn_chime)
-* allowed running simulations from custom Python function calls
-* included a few additional command line (or passable) arguments, including:
+* allows running simulations from command line (like cli.py in penn_chime)
+* allows running simulations from custom Python function calls
+* includes a few additional command line (or passable) arguments, including:
   - standard CHIME input config filename is a required input
   - a scenario name (prepended to output filenames)
   - output path
-* after a simulation scenario was run, a results dictionary is created that contains:
+* after a simulation scenario is run, a results dictionary is created that contains:
   - the scenario name
   - the standard admits, census, and sim_sir_w_date dataframes
   - the dispositions dataframe
@@ -25,8 +25,8 @@ to make my code easy to maintain if CHIME changes.
 
 - created arg parser just for my added input parameters
 - uses standard CHIME input config file
-- call penn_chime.cli.parse_args() to parse the input config file
-- the main simululation function signature is `sim_chime(scenario: str, p: Parameters):`
+- call `penn_chime.cli.parse_args()` to parse the input config file
+- the main simulation function signature is `sim_chime(scenario: str, p: Parameters):`
 - `sim_chime()` returns a tuple containing the model object and the results dictionary described above.
 
 Here's a Jupyter notebook showing its use: [using_sim_chime_scenario_runner.ipynb]()

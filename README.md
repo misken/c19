@@ -22,6 +22,30 @@ So, I took our actual admits (from 2/20/2020 to a few days ago) and just fit an 
 
 You can see the results in this notebook: [model_calibration_validation.ipynb](https://github.com/misken/c19/blob/master/mychime/calibration_validation/model_calibration_validation.ipynb)
 
+### sim_chime_scenario_runner.py (WIP)
+
+Location: https://github.com/misken/c19/tree/master/mychime/scenario_runner
+
+A simple Python module for working with the penn_chime model
+that: 
+
+* allows running simulations from command line (like cli.py in penn_chime)
+* allows running simulations from custom Python function calls
+* includes a few additional command line (or passable) arguments, including:
+  - standard CHIME input config filename is a required input
+  - a scenario name (prepended to output filenames)
+  - output path
+* after a simulation scenario is run, a results dictionary is created that contains:
+  - the scenario name
+  - the standard admits, census, and sim_sir_w_date dataframes
+  - the dispositions dataframe
+  - a dictionary containing the input parameters
+  - a dictionary containing important intermediate variable values such as beta, doubling_time, ...
+* writes out the results 
+  - dataframes to csv
+  - dictionaries to json
+* (WIP) runs multiple scenarios corresponding to user specified ranges for one or more input variables.
+
 ### Capacity driven census and admission adjustments to CHIME model
 
 Had idea for adjusting census and admission sduring **early stages** of virus spread to deal with census at time 0 problem. 
@@ -65,19 +89,6 @@ When $A \lt A^{*}$, the underlying growth rate in the epidemic must be slowing a
 ### Plan
 
 I'm going to try to put a procedure together that uses standard outputs from the current chime model to implement these ideas. It would likely require user to input capacity for each resource being modelled (will just start with beds).
-
-
-### sim_chime_scenario_runner.py (WIP)
-
-We adapted the CLI application in the CHIME project (https://github.com/CodeForPhilly/chime).
-
-- added scenario and output_path parameters (separate from main Parameters object)
-- uses standard CHIME input config file
-- added ability to import this and call sim_chime() function from external apps so that we can run tons of scenarios over ranges of input parameters
-- output is a dictionary of the standard CHIME dataframes as well as dictionaries
-containing parameter and variable values.
-- also writes out csvs of the dataframes and json for the dictionaries
-
 
 ### Cheat sheets for installing CHIME locally
 
