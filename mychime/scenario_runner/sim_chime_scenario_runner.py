@@ -124,7 +124,7 @@ def write_results(results, scenario, path):
         (results["admits_df"], "admits"),
         (results["census_df"], "census"),
     ):
-        df.to_csv(path + scenario + '_' + name + ".csv", index=False)
+        df.to_csv(path + scenario + '_' + name + ".csv", index=True)
 
     # Variable dictionaries
     with open(path + scenario + "_inputs.json", "w") as f:
