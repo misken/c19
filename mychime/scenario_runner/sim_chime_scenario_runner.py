@@ -82,7 +82,7 @@ def create_params_from_file(file):
     if a.date_first_hospitalized is None:
         p.doubling_time = a.doubling_time
     else:
-        p.date_first_hospitalized = a.date_first_hospitalized,
+        p.date_first_hospitalized = a.date_first_hospitalized
 
 
     return p
