@@ -67,43 +67,50 @@ def sim_chime(scenario: str, p: Parameters
     :param p:
     """
 
-
     input_params_dict = vars(p)
 
     # Run the model
-    m = Model.SimSirModel(p)
+    m = Model(p)
 
     # Gather results
-    results = gather_sim_results(m, sim_scenario, input_params_dict)
+    results = gather_sim_results(m, scenario, input_params_dict)
     return results
 
 
-def write_results(rslt, sim_scenario, out):
+def write_results(results, scenario, path):
+    """
+
+    :param results:
+    :param scenario:
+    :param path:
+    :return:
+    """
 
     # Results dataframes
     for df, name in (
-        (rslt["raw_sir_df"], "raw_sir"),
-        (rslt["dispositions_df"], "dispositions"),
-        (rslt["admits_df"], "admits"),
-        (rslt["census_df"], "census"),
+        (results["raw_sir_df"], "raw_sir"),
+        (results["dispositions_df"], "dispositions"),
+        (results["admits_df"], "admits"),
+        (results["census_df"], "census"),
     ):
-        df.to_csv(out + sim_scenario + '_' + name + ".csv", index=False)
+        df.to_csv(path + scenario + '_' + name + ".csv", index=False)
 
     # Variable dictionaries
-    with open(out + sim_scenario + "_inputs.json", "w") as f:
-        json.dump(rslt['input_params_dict'], f)
+    with open(path + scenario + "_inputs.json", "w") as f:
+        json.dump(results['input_params_dict'], f)
 
-    with open(out + sim_scenario + "_key_vars.json", "w") as f:
-        json.dump(rslt['intermediate_variables_dict'], f)
+    with open(path + scenario + "_key_vars.json", "w") as f:
+        json.dump(results['intermediate_variables_dict'], f)
 
 
 def gather_sim_results(m, scenario, input_params_dict):
+    """
 
-    # Get the output dfs
-    # raw_sir_df = m.raw_df
-    # dispositions_df = m.dispositions_df
-    # admits_df = m.admits_df
-    # census_df = m.census_df
+    :param m:
+    :param scenario:
+    :param input_params_dict:
+    :return:
+    """
 
     # Get key input/output variables
     intrinsic_growth_rate = m.intrinsic_growth_rate
@@ -136,19 +143,7 @@ def gather_sim_results(m, scenario, input_params_dict):
     return results
 
 
-def sim_chimes(scenarios: str, params: Parameters = None,
-               current_hospitalized: int = None,
-               doubling_time: float = None,
-               known_infected: int = None,
-               relative_contact_rate: float = None,
-               susceptible: int = None,
-               hospitalized: RateLos = None,
-               icu: RateLos = None,
-               ventilated: RateLos = None,
-               market_share: float = None,
-               n_days: int = None,
-               recovery_days: float = None,
-               ):
+def sim_chimes(scenarios: str, p: Parameters = None):
     """
     Run many chime simulations.
 
@@ -160,65 +155,16 @@ def sim_chimes(scenarios: str, params: Parameters = None,
 
     :param scenarios:
     :param params:
-    :param current_hospitalized:
-    :param doubling_time:
-    :param known_infected:
-    :param relative_contact_rate:
-    :param susceptible:
-    :param hospitalized:
-    :param icu:
-    :param ventilated:
-    :param market_share:
-    :param n_days:
-    :param recovery_days:
+
     :return:
     """
-
-    if params is not None:
-        params_dict = vars(params)
-    else:
-        params_dict = {"current_hospitalized": None,
-                       "doubling_time": None,
-                       "known_infected": None,
-                       "relative_contact_rate": None,
-                       "susceptible": None,
-                       "hospitalized": None,
-                       "icu": None,
-                       "ventilated": None,
-                       "market_share": None,
-                       "n_days": None,
-                       "recovery_days": None,
-                       }
-
-    # Check for parameter updates passed
-    vals_passed = {key: value for (key, value) in vars().items()
-                   if key not in ['scenario', 'params']}
-
-    for key, value in vals_passed.items():
-        if value is not None:
-            params_dict[key] = value
-
-    # Create Parameters object
-    p = Parameters(
-        current_hospitalized=params_dict['current_hospitalized'],
-        doubling_time=params_dict['doubling_time'],
-        known_infected=params_dict['known_infected'],
-        market_share=params_dict['market_share'],
-        n_days=params_dict['n_days'],
-        relative_contact_rate=params_dict['relative_contact_rate'],
-        susceptible=params_dict['susceptible'],
-        hospitalized=params_dict['hospitalized'],
-        icu=params_dict['icu'],
-        ventilated=params_dict['ventilated'],
-    )
 
     base_input_params_dict = vars(p)
 
     # Create a range of social distances
 
     soc_dists = np.arange(0.05, 0.60, 0.05)
-    # array([0.05, 0.1 , 0.15, 0.2 , 0.25, 0.3 , 0.35, 0.4 , 0.45, 0.5 , 0.55,
-    #        0.6 , 0.65, 0.7 , 0.75, 0.8 , 0.85])
+    # array([0.05, 0.1 , 0.15, 0.2 , 0.25, 0.3 , 0.35, 0.4 , 0.45, 0.5 , 0.55, 0.6 ])
 
     num_scenarios = len(soc_dists)
 
@@ -228,15 +174,15 @@ def sim_chimes(scenarios: str, params: Parameters = None,
 
     results_list = []
 
-    for sdpct in soc_dists:
-        sim_scenario = '{}{:.0f}'.format(scenarios, 100 * sdpct)
+    for sd_pct in soc_dists:
+        sim_scenario = '{}{:.0f}'.format(scenarios, 100 * sd_pct)
 
         # Update the parameters for this scenario
-        p.relative_contact_rate = sdpct
+        p.relative_contact_rate = sd_pct
         input_params_dict = vars(p)
 
         # Run the model
-        m = SimSirModel(p)
+        m = Model.SimSirModel(p)
 
         # Gather results
         results = gather_sim_results(m, sim_scenario, input_params_dict)
@@ -280,8 +226,8 @@ if __name__ == "__main__":
         # Just running one scenario
         results = sim_chime(scenario, p)
 
-        if not a.quiet:
-            print("Scenario: {}\n".format(results['scenario_str']))
+        if not my_args.quiet:
+            print("Scenario: {}\n".format(results['scenario']))
             print("\nInput parameters")
             print("{}".format(50 * '-'))
             print(json.dumps(results['input_params_dict'], indent=4, sort_keys=False))
@@ -294,11 +240,11 @@ if __name__ == "__main__":
         write_results(results, scenario, output_path)
     else:
         # Running a bunch of scenarios using sim_chimes()
-        results_list = sim_chimes(a.scenarios, p)
+        results_list = sim_chimes(my_args.scenarios, p)
 
         for results in results_list:
             sim_scenario = results['scenario_str']
-            if not a.quiet:
+            if not my_args.quiet:
                 print("Scenario: {}\n".format(results['scenario_str']))
                 print("\nInput parameters")
                 print("{}".format(50 * '-'))
