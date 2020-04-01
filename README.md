@@ -5,6 +5,15 @@ hospital impact modeling. Some of the work is based on the amazing CHIME
 project done by the folks at [UPenn's Predictive Healthcare group](http://predictivehealthcare.pennmedicine.org/) and
 the [CodeForPhilly CHIME project](https://codeforphilly.org/projects/chime). 
 
+## What's new?
+
+### sim_chime_scenario_runner.py
+
+A simple Python module for working with the penn_chime model. More details below and at following:
+
+* Location in repo: https://github.com/misken/c19/tree/master/mychime/scenario_runner
+* A Jupyter notebook demo showing its use: [using_sim_chime_scenario_runner.ipynb](https://github.com/misken/c19/blob/master/mychime/scenario_runner/using_sim_chime_scenario_runner.ipynb)
+
 ## CHIME project
 
 * [Online hospital impact simulator](https://penn-chime.phl.io/)
@@ -25,6 +34,7 @@ You can see the results in this notebook: [model_calibration_validation.ipynb](h
 ### sim_chime_scenario_runner.py (WIP)
 
 Location: https://github.com/misken/c19/tree/master/mychime/scenario_runner
+
 A Jupyter notebook demo showing its use: [using_sim_chime_scenario_runner.ipynb](https://github.com/misken/c19/blob/master/mychime/scenario_runner/using_sim_chime_scenario_runner.ipynb)
 
 A simple Python module for working with the penn_chime model
