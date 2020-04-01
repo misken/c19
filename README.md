@@ -25,6 +25,7 @@ You can see the results in this notebook: [model_calibration_validation.ipynb](h
 ### sim_chime_scenario_runner.py (WIP)
 
 Location: https://github.com/misken/c19/tree/master/mychime/scenario_runner
+A Jupyter notebook demo showing its use: [using_sim_chime_scenario_runner.ipynb](https://github.com/misken/c19/blob/master/mychime/scenario_runner/using_sim_chime_scenario_runner.ipynb)
 
 A simple Python module for working with the penn_chime model
 that: 
