@@ -5,6 +5,7 @@ Here's a Jupyter notebook showing its use: [using_sim_chime_scenario_runner.ipyn
 A simple Python module for working with the penn_chime model
 that: 
 
+* assumes that you've pip installed `penn_chime` per https://github.com/CodeForPhilly/chime/pull/249 from a local clone of the chime repo
 * allows running simulations from command line (like cli.py in penn_chime)
 * is importable so can also run simulations via function call
 * includes a few additional command line (or passable) arguments, including:
