@@ -141,6 +141,8 @@ https://github.com/misken/c19/blob/master/get_c19_data_nytimes.ipynb
 * https://metasd.com/2020/03/community-coronavirus-model-bozeman/
 * https://forio.com/app/jeroen_struben/corona-virus-covid19-seir-simulator/index.html#introduction.html
 * http://covidsim.eu/
+* https://www.hsye.org/covid-19-capacity-mgmt (Healthcare Systems Engineering Institute at Northeastern U.) 
+
 
 
 ## PySD
