@@ -20,6 +20,8 @@ from argparse import (
 from datetime import datetime
 
 from pandas import DataFrame
+import numpy as np
+import pandas as pd
 
 from penn_chime.constants import CHANGE_DATE
 from penn_chime.parameters import Parameters, Disposition
@@ -66,8 +68,6 @@ def create_params_from_file(file):
 
     p = Parameters(
         current_hospitalized=a.current_hospitalized,
-        date_first_hospitalized=a.date_first_hospitalized,
-        doubling_time=a.doubling_time,
         infectious_days=a.infectious_days,
         market_share=a.market_share,
         n_days=a.n_days,
@@ -78,6 +78,12 @@ def create_params_from_file(file):
         icu=Disposition(a.icu_rate, a.icu_days),
         ventilated=Disposition(a.ventilated_rate, a.ventilated_days),
     )
+
+    if a.date_first_hospitalized is None:
+        p.doubling_time = a.doubling_time
+    else:
+        p.date_first_hospitalized = a.date_first_hospitalized,
+
 
     return p
 
@@ -113,7 +119,7 @@ def write_results(results, scenario, path):
 
     # Results dataframes
     for df, name in (
-        (results["raw_sir_df"], "raw_sir"),
+        (results["sim_sir_w_date_df"], "sim_sir_w_date_df"),
         (results["dispositions_df"], "dispositions"),
         (results["admits_df"], "admits"),
         (results["census_df"], "census"),
@@ -122,6 +128,11 @@ def write_results(results, scenario, path):
 
     # Variable dictionaries
     with open(path + scenario + "_inputs.json", "w") as f:
+        # Convert date to string to make json happy
+        # “%Y-%m-%d”
+        results['input_params_dict']['date_first_hospitalized'] = results['input_params_dict'][
+            'date_first_hospitalized'].strftime("%Y-%m-%d")
+
         json.dump(results['input_params_dict'], f, default=str)
 
     with open(path + scenario + "_key_vars.json", "w") as f:
@@ -246,6 +257,7 @@ if __name__ == "__main__":
         icu=Disposition(a.icu_rate, a.icu_days),
         ventilated=Disposition(a.ventilated_rate, a.ventilated_days),
     )
+    input_check = vars(p)
 
     if my_args.scenarios is None:
         # Just running one scenario

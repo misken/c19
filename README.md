@@ -30,7 +30,7 @@ A simple Python module for working with the penn_chime model
 that: 
 
 * allows running simulations from command line (like cli.py in penn_chime)
-* allows running simulations from custom Python function calls
+* is importable so can also run simulations via function call
 * includes a few additional command line (or passable) arguments, including:
   - standard CHIME input config filename is a required input
   - a scenario name (prepended to output filenames)
