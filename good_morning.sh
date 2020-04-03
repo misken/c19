@@ -27,6 +27,7 @@ printf '\n-------------------------------\n'
 printf '\nOpen a few browser tabs\n'
 printf '\n-----------------------\n'
 xdg-open https://github.com/misken/c19
+xdg-open https://penn-chime.phl.io/
 xdg-open https://github.com/CodeForPhilly/chime/issues?q=is%3Aissue+is%3Aopen+label%3Amodels
 xdg-open https://www.arcgis.com/apps/opsdashboard/index.html#/bda7594740fd40299423467b48e9ecf6
 
