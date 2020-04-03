@@ -9,7 +9,7 @@ the [CodeForPhilly CHIME project](https://codeforphilly.org/projects/chime).
 
 ### chime_flow_resources_p1.ipynb
 
-The goal for this notebook is to try to help people better understand the modeling principles, math and code behind the resource modeling in CHIME. It walks through how admits and census are computed for hospitalizations, ICU beds and vents. It does this concepually as well as with math and with code. It also discusses some basic modeling issues related to using CHIME.
+The goal for this notebook is to try to help people better understand the modeling principles, math and code behind the resource modeling in CHIME. It walks through how admits and census are computed for hospitalizations, ICU beds and vents. It also discusses some basic modeling issues related to using CHIME for assessing resource impacts of covid-19.
 
 [chime_flow_resources_p1.ipynb](https://github.com/misken/c19/blob/master/mychime/modeling/chime_flow_resources_p1.ipynb)
 
@@ -152,6 +152,7 @@ https://github.com/misken/c19/blob/master/get_c19_data_nytimes.ipynb
 
 ## Articles, blog posts, vids
 
+* [The IMHE COVID-19 model is fatally flawed](https://medium.com/@robertbracco1/the-ihme-covid19-model-is-dangerously-flawed-c19928464db1)
 * [IHME - COVID-19 Projections](https://covid19.healthdata.org/projections) - paper describing methodology is [here](http://www.healthdata.org/research-article/forecasting-covid-19-impact-hospital-bed-days-icu-days-ventilator-days-and-deaths)
 * [mathbabe post on covid-19](https://mathbabe.org/2020/03/30/comments-on-covid-19/)
 * [Coronavirus modelers factor in new public health risk: Accusations their work is a hoax](https://www.washingtonpost.com/health/2020/03/27/coronavirus-models-politized-trump/)
