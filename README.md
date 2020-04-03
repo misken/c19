@@ -7,6 +7,12 @@ the [CodeForPhilly CHIME project](https://codeforphilly.org/projects/chime).
 
 ## What's new?
 
+### chime_flow_resources_p1.ipynb
+
+The goal for this notebook is to try to help people better understand the concepts, math and code behind the resource modeling in CHIME. It walks through how admits and census are computed for hospitalizations, ICU beds and vents. It does this concepually as well as with math and with code. It also discusses some basic modeling issues related to using CHIME.
+
+[chime_flow_resources_p1.ipynb](https://github.com/misken/c19/blob/master/mychime/modeling/chime_flow_resources_p1.ipynb)
+
 ### sim_chime_scenario_runner.py
 
 A simple Python module for working with the penn_chime model. More details below and at following:
