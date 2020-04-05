@@ -3,7 +3,7 @@
 https://docs.conda.io/projects/conda/en/latest/user-guide/tasks/manage-environments.html
 
 Create a folder somewhere to store your conda "recipes" and put
-the [datasci.yml] file in it. Open it in a text editor and you'll
+the [datasci.yml](https://github.com/misken/c19/blob/master/datasci.yml) file in it. Open it in a text editor and you'll
 quickly see what it is and is going to do.
 
 ### Fire up an Anaconda prompt and navigate to your recipes folder
