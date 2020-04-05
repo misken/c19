@@ -108,5 +108,53 @@ Simulating SD models in Python - https://pysd.readthedocs.io/en/master/
 
 Can read Vensim .mdl files. They are just text files.
 
+## INFORMS Forum post
+
+This post appeared in March sometime in the [INFORMS](https://www.informs.org/) daily forum.
+
+----- START -----
+Multiple folks from the System Dynamics (SD) community have built models. Tom Fiddaman also made a video
+
+Tom Fiddaman's model/video
+metasd.com/2020/03/community-coronavirus-model-bozeman
+
+Jeroen Struben's model
+forio.com/app/jeroen_struben/...
+
+Tom Fiddaman's review of Struben's model
+metasd.com/2020/03/interactive-coronavirus-models
+
+Tom Fiddaman's review of Jack Homer's COVID-19 model
+metasd.com/2020/03/model-covid-19-us
+
+
+Bob Eberlein's model
+
+exchange.iseesystems.com/public/isee/covid-19-simulator/...
+https://exchange.iseesystems.com/models/player/isee/covid-19-model
+
+
+Bob Eberlein will be presenting his work this Friday, March 27th 2-3PM ET in a Worcester Polytechnic Institute (WPI) System Dynamics Collective Learning Meeting (CLM). I am waiting on details from him about the presentation. Please follow/join WPI SD for more info 
+
+twitter.com/WPISDclub
+
+www.linkedin.com/groups/1916314
+
+Below is a link to sign up to be on the WPI System Dynamics Club mailing list:
+
+eepurl.com/dzmA4j
+
+
+Wish you and yours health and happiness!
+
+Sincerely,
+
+WPI System Dynamics Social Media Manager
+
+Forgot to share the System Dynamics Society's page on COVID-19 with INFORMS folks...and I should share the INFORMS page on COVID-19 with SD folks
+https://www.systemdynamics.org/covid-19
+
+----- END -----
+
 
 
