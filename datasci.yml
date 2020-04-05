@@ -1,0 +1,16 @@
+name: datasci
+dependencies:
+  - pandas
+  - scikit-learn
+  - matplotlib
+  - seaborn
+  - jupyter
+  - jupyterlab
+  - requests
+  - pip
+  - pip:
+    - requests
+    - lxml
+    - beautifulsoup4
+    - us
+  
