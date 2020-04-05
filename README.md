@@ -126,7 +126,7 @@ logic of the model.**
 
 I've added tons of code comments and other descriptive text throughout the notebook to help others understand exactly how this works and how we might adapt it for our use.
 
-https://github.com/misken/c19/blob/master/mychime/chime_earlyversion_annotated.ipynb
+https://github.com/misken/c19/blob/master/mychime/archive/chime_earlyversion_annotated.ipynb
 
 ### Jupyter notebook for downloading COVID-19 time series data
 
