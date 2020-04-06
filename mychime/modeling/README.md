@@ -12,6 +12,11 @@ The goal for this notebook is to try to help people better understand the modeli
 
 [chime_flow_resources_p1.ipynb](https://github.com/misken/c19/blob/master/mychime/modeling/chime_flow_resources_p1.ipynb)
 
+**WIP** In part 2, I'm working on a queueing model based approximation for the census distribution over time. This will allow us to include census distribution bands instead of just a deterministic point
+estimate of mean census. Still much to do but came up with nice way to model time dependent admits.
+
+[chime_flow_resources_p2.ipynb](https://github.com/misken/c19/blob/master/mychime/modeling/chime_flow_resources_p2.ipynb)
+
 ### sim_chime_scenario_runner.py (2020-04-01)
 
 A simple Python module for working with the penn_chime model from the command line or as importable functions. More details below and at following:
