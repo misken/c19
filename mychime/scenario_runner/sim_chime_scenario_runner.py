@@ -245,6 +245,8 @@ if __name__ == "__main__":
 
     p = Parameters(
         current_hospitalized=a.current_hospitalized,
+        mitigation_date=a.mitigation_date,
+        current_date=a.current_date,
         date_first_hospitalized=a.date_first_hospitalized,
         doubling_time=a.doubling_time,
         infectious_days=a.infectious_days,
