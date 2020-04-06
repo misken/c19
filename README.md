@@ -24,14 +24,6 @@ estimate of mean census. Still much to do but came up with nice way to model tim
 
 ### sim_chime_scenario_runner.py (2020-04-01)
 
-**Note Monday 2020-04-06** - this script uses the `penn_chem.cli` module and right now
-the CLI is a little out of sync with the web app. The two most recently
-added parameters `mitigation-date` and `current-date` haven't yet made it into
-the CLI on the `develop` branch. It looks like a fix was done yesterday and
-that it should get merged shortly. For myself, I just hacked in the two new
-parameters into the arg parser in `cli.py` until the fix goes live (just copied
-and modifed the `add_argument` line from one of the other date args).
-
 A simple Python module for working with the penn_chime model from the command line or as importable functions. 
 
 * A Jupyter notebook demo showing its use: [using_sim_chime_scenario_runner.ipynb](https://github.com/misken/c19/blob/master/mychime/scenario_runner/using_sim_chime_scenario_runner.ipynb)
