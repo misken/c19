@@ -68,6 +68,8 @@ def create_params_from_file(file):
 
     p = Parameters(
         current_hospitalized=a.current_hospitalized,
+        mitigation_date=a.mitigation_date,
+        current_date=a.current_date,
         infectious_days=a.infectious_days,
         market_share=a.market_share,
         n_days=a.n_days,
