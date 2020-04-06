@@ -18,27 +18,27 @@ import sim_chime_scenario_runner as runner
 
 @pytest.fixture
 def admits_dt361_df():
-    return pd.read_csv('tests/output/dt361_projected_admits.csv', parse_dates=['date'])
+    return pd.read_csv('tests/output/2020-03-27_dt361_projected_admits.csv', parse_dates=['date'])
 
 @pytest.fixture
 def census_dt361_df():
-    return pd.read_csv('tests/output/dt361_projected_census.csv', parse_dates=['date'])
+    return pd.read_csv('tests/output/2020-03-27_dt361_projected_census.csv', parse_dates=['date'])
 
 @pytest.fixture
 def admits_fd20200220_df():
-    return pd.read_csv('tests/output/fd2020-02-20_projected_admits.csv', parse_dates=['date'])
+    return pd.read_csv('tests/output/2020-03-27_fd0220_projected_admits.csv', parse_dates=['date'])
 
 @pytest.fixture
 def census_fd20200220_df():
-    return pd.read_csv('tests/output/fd2020-02-20_projected_census.csv', parse_dates=['date'])
+    return pd.read_csv('tests/output/2020-03-27_fd0220_projected_census.csv', parse_dates=['date'])
 
 
 def test_import(admits_dt361_df, census_dt361_df,
                 admits_fd20200220_df, census_fd20200220_df):
 
 
-    p_dt361 = runner.create_params_from_file('tests/cli_inputs_semi_dt3.61.cfg')
-    p_fd20200220 = runner.create_params_from_file('tests/cli_inputs_semi_fd2020-02-20.cfg')
+    p_dt361 = runner.create_params_from_file('tests/dt361.cfg')
+    p_fd20200220 = runner.create_params_from_file('tests/fd0220.cfg')
 
     scenario = 'runner_import_dt361'
     model, results_dt361 = runner.sim_chime(scenario, p_dt361)
@@ -60,9 +60,9 @@ def test_import(admits_dt361_df, census_dt361_df,
                                    admits_dt361_df['day'],
                                    check_less_precise=True)
 
-    # pd.testing.assert_series_equal(results_dt361['admits_df']['date'],
-    #                                admits_dt361_df['date'],
-    #                                check_less_precise=True)
+    pd.testing.assert_series_equal(results_dt361['admits_df']['date'],
+                                   admits_dt361_df['date'],
+                                   check_less_precise=True)
 
     # Census - dt361
     pd.testing.assert_series_equal(results_dt361['census_df']['hospitalized'],
@@ -81,9 +81,9 @@ def test_import(admits_dt361_df, census_dt361_df,
                                    census_dt361_df['day'],
                                    check_less_precise=True)
 
-    # pd.testing.assert_series_equal(results_dt361['census_df']['date'],
-    #                                census_dt361_df['date'],
-    #                                check_less_precise=True)
+    pd.testing.assert_series_equal(results_dt361['census_df']['date'],
+                                   census_dt361_df['date'],
+                                   check_less_precise=True)
 
     scenario = 'runner_import_fd20200220'
     model, results_fd20200220 = runner.sim_chime(scenario, p_fd20200220)
@@ -105,9 +105,9 @@ def test_import(admits_dt361_df, census_dt361_df,
                                    admits_fd20200220_df['day'],
                                    check_less_precise=True)
 
-    # pd.testing.assert_series_equal(results_fd20200220['admits_df']['date'],
-    #                                admits_fd20200220_df['date'],
-    #                                check_less_precise=True)
+    pd.testing.assert_series_equal(results_fd20200220['admits_df']['date'],
+                                   admits_fd20200220_df['date'],
+                                   check_less_precise=True)
 
     # Census - fd20200220
     pd.testing.assert_series_equal(results_fd20200220['census_df']['hospitalized'],
@@ -126,9 +126,9 @@ def test_import(admits_dt361_df, census_dt361_df,
                                    census_fd20200220_df['day'],
                                    check_less_precise=True)
 
-    # pd.testing.assert_series_equal(results_fd20200220['census_df']['date'],
-    #                                census_fd20200220_df['date'],
-    #                                check_less_precise=True)
+    pd.testing.assert_series_equal(results_fd20200220['census_df']['date'],
+                                   census_fd20200220_df['date'],
+                                   check_less_precise=True)
 
     print(results_dt361['scenario'])
     print(results_dt361['input_params_dict'])
