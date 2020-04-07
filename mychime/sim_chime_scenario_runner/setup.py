@@ -28,7 +28,7 @@ setup(
     ],
     python_requires='>=3.7',
     entry_points = {
-        'console_scripts': ['sim_chime_scenario_runner=sim_chime_scenario_runner:main'],
+        'console_scripts': ['sim_chime_scenario_runner=sim_chime_scenario_runner.sim_chime_scenario_runner:main'],
     },
     keywords=[],
     include_package_data=True,

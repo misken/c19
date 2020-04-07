@@ -232,7 +232,7 @@ def sim_chimes(scenarios: str, p: Parameters = None):
     return results_list
 
 
-if __name__ == "__main__":
+def main():
     my_args = parse_args()
     my_args_dict = vars(my_args)
 
@@ -297,6 +297,10 @@ if __name__ == "__main__":
                 print("\n")
 
             write_results(results, sim_scenario, output_path)
+
+if __name__ == "__main__":
+    main()
+
 
 """
 MIT License
