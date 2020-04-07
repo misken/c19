@@ -17,13 +17,32 @@ estimate of mean census. Still much to do but came up with nice way to model tim
 
 [chime_flow_resources_p2.ipynb](https://github.com/misken/c19/blob/master/mychime/modeling/chime_flow_resources_p2.ipynb)
 
-### sim_chime_scenario_runner.py (2020-04-01)
+### sim_chime_scenario_runner.py (updated 2020-04-07)
 
-A simple Python module for working with the penn_chime model from the command line or as importable functions. More details below and at following:
+A simple Python module for working with the penn_chime model from the command line or as importable functions. 
 
-* A Jupyter notebook demo showing its use: [using_sim_chime_scenario_runner.ipynb](https://github.com/misken/c19/blob/master/mychime/sim_chime_scenario_runner/demos/using_sim_chime_scenario_runner.ipynb)
+Has it's own repo now: https://github.com/misken/sim_chime_scenario_runner
 
-**Note**: Assumes that you've pip installed `penn_chime` per https://github.com/CodeForPhilly/chime/pull/249 from a local clone of the chime repohttps://github.com/misken/c19
+* A Jupyter notebook demo showing its use: [using_sim_chime_scenario_runner.ipynb](https://github.com/misken/sim_chime_scenario_runner/blob/master/demos/using_sim_chime_scenario_runner.ipynb)
+
+* assumes that you've pip installed `penn_chime` either per https://github.com/CodeForPhilly/chime/pull/249 from a local clone of the chime repo or from pypi if it's eventually put up there
+* [OPTIONAL] You can do a `pip install .` from the directory containing setup.py if you want to install into a virtual environment
+* allows running simulations from command line (like cli.py in penn_chime)
+* is importable so can also run simulations via function call
+* includes a few additional command line (or passable) arguments, including:
+  - standard CHIME input config filename is a required input
+  - a scenario name (prepended to output filenames)
+  - output path
+* after a simulation scenario is run, a results dictionary is created that contains:
+  - the scenario name
+  - the standard admits, census, and sim_sir_w_date dataframes
+  - the dispositions dataframe
+  - a dictionary containing the input parameters
+  - a dictionary containing important intermediate variable values such as beta, doubling_time, ...
+* writes out the results 
+  - dataframes to csv
+  - dictionaries to json
+* (WIP) runs multiple scenarios corresponding to user specified ranges for one or more input variables.
 
 ### Model calibration/validation for new (2020-03-30) CHIME model
 
