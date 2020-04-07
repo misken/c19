@@ -1,14 +1,12 @@
 .ipynb_checkpoints/
+.idea/
+__pycache__/
 community/
 myc19data/
 call_center_sched/
 chime/
-mychime/.idea/
-mychime/modeling/__pycache__/
 mychime/archive/using_run_sim_chime_scenario/output/batches/*.json
 mychime/archive/using_run_sim_chime_scenario/output/batches/*.csv
 mychime/modeling/sim_chime_scenario_runner.py
-mychime/sim_chime_scenario_runner/.idea/
-mychime/sim_chime_scenario_runner/__pycache__/
-mychime/sim_chime_scenario_runner/tests/output/
+
 
