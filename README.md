@@ -26,7 +26,7 @@ estimate of mean census. Still much to do but came up with nice way to model tim
 
 A simple Python module for working with the penn_chime model from the command line or as importable functions. 
 
-* A Jupyter notebook demo showing its use: [using_sim_chime_scenario_runner.ipynb](https://github.com/misken/c19/blob/master/mychime/scenario_runner/using_sim_chime_scenario_runner.ipynb)
+* A Jupyter notebook demo showing its use: [using_sim_chime_scenario_runner.ipynb](https://github.com/misken/c19/blob/master/mychime/sim_chime_scenario_runner/docs/using_sim_chime_scenario_runner.ipynb)
 
 **Note**: Assumes that you've pip installed `penn_chime` per https://github.com/CodeForPhilly/chime/pull/249 from a local clone of the chime repo.
 
