@@ -14,8 +14,7 @@ setup(
     author_email="",
     description="Wrapper for penn_chime to facilitate scenario running/management",
     url="https://github.com/misken/c19",
-    package_dir={'': 'src'},
-    packages=find_namespace_packages(where='src', exclude=('tests')),
+    packages=['sim_chime_scenario_runner'],
     install_requires=[
         "numpy",
         "pandas",
