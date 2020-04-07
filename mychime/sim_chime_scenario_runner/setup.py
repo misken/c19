@@ -19,7 +19,7 @@ setup(
     install_requires=[
         "numpy",
         "pandas",
-        "penn_chime",
+        "penn-chime",
     ],
     classifiers=[
         "Programming Language :: Python :: 3",
