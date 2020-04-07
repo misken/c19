@@ -1,19 +1,13 @@
 ## sim_chime_scenario_runner
 
-**Note Monday 2020-04-06** - this script uses the `penn_chem.cli` module and right now
-the CLI is a little out of sync with the web app. The two most recently
-added parameters `mitigation-date` and `current-date` haven't yet made it into
-the CLI on the `develop` branch. It looks like a fix was done yesterday and
-that it should get merged shortly. For myself, I just hacked in the two new
-parameters into the arg parser in `cli.py` until the fix goes live (just copied
-and modifed the `add_argument` line from one of the other date args).
+A simple Python module for working with the penn_chime model from the command line or as importable functions. 
 
-Here's a Jupyter notebook showing its use: [using_sim_chime_scenario_runner.ipynb](https://github.com/misken/c19/blob/master/mychime/scenario_runner/using_sim_chime_scenario_runner.ipynb)
+* A Jupyter notebook demo showing its use: [using_sim_chime_scenario_runner.ipynb](https://github.com/misken/c19/blob/master/mychime/sim_chime_scenario_runner/demos/using_sim_chime_scenario_runner.ipynb)
 
-A simple Python module for working with the penn_chime model
-that: 
+**Note**: Assumes that you've pip installed `penn_chime` per https://github.com/CodeForPhilly/chime/pull/249 from a local clone of the chime repo.
 
-* assumes that you've pip installed `penn_chime` per https://github.com/CodeForPhilly/chime/pull/249 from a local clone of the chime repo
+* assumes that you've pip installed `penn_chime` either per https://github.com/CodeForPhilly/chime/pull/249 from a local clone of the chime repo or from pypi if it's eventually put up there
+* [OPTIONAL] You can do a `pip install .` from the directory containing setup.py if you want to install into a virtual environment
 * allows running simulations from command line (like cli.py in penn_chime)
 * is importable so can also run simulations via function call
 * includes a few additional command line (or passable) arguments, including:
