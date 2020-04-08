@@ -1,7 +1,7 @@
 # Resources for COVID-19 hospital impact modelling
 
-This repo is just a place store some notes and code related to c19
-hospital impact modeling. Some of the work is based on the amazing CHIME
+This repo is just a place to store some notes, code and other resources related to c19
+hospital impact modeling work I'm doing. Some of the work is based on the amazing CHIME
 project:
 
 * [Online hospital impact simulator](https://penn-chime.phl.io/)
@@ -22,7 +22,7 @@ estimate of mean census. Still much to do but came up with nice way to model tim
 
 [chime_flow_resources_p2.ipynb](https://github.com/misken/c19/blob/master/mychime/modeling/chime_flow_resources_p2.ipynb)
 
-### sim_chime_scenario_runner.py (updated 2020-04-08 for consistency penn-chime v1.1.3)
+### sim_chime_scenario_runner.py (updated 2020-04-08 for consistency with penn-chime v1.1.3)
 
 **NOTE** - Input parameter file for CHIME has a few changes. See https://github.com/misken/sim_chime_scenario_runner.
 
