@@ -103,6 +103,7 @@ https://github.com/misken/c19/blob/master/mychime/archive/chime_earlyversion_ann
 
 ## Articles, blog posts, vids
 
+* [America’s most influential coronavirus model just revised its estimates downward. But not every model agrees.](https://www.washingtonpost.com/health/2020/04/06/americas-most-influential-coronavirus-model-just-revised-its-estimates-downward-not-every-model-agrees/)
 * [The IMHE COVID-19 model is fatally flawed](https://medium.com/@robertbracco1/the-ihme-covid19-model-is-dangerously-flawed-c19928464db1)
 * [IHME - COVID-19 Projections](https://covid19.healthdata.org/projections) - paper describing methodology is [here](http://www.healthdata.org/research-article/forecasting-covid-19-impact-hospital-bed-days-icu-days-ventilator-days-and-deaths)
 * [mathbabe post on covid-19](https://mathbabe.org/2020/03/30/comments-on-covid-19/)
