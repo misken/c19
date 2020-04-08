@@ -8,7 +8,7 @@ then
   git fetch upstream
   git checkout develop
   git merge upstream/develop
-  pip install .
+  pip install . -q
 else
   echo 'need to activate conda chime environment'
 fi

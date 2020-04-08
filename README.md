@@ -22,7 +22,9 @@ estimate of mean census. Still much to do but came up with nice way to model tim
 
 [chime_flow_resources_p2.ipynb](https://github.com/misken/c19/blob/master/mychime/modeling/chime_flow_resources_p2.ipynb)
 
-### sim_chime_scenario_runner.py (updated 2020-04-07)
+### sim_chime_scenario_runner.py (updated 2020-04-08 for consistency penn-chime v1.1.3)
+
+**NOTE** - Input parameter file for CHIME has a few changes. See https://github.com/misken/sim_chime_scenario_runner.
 
 A simple Python module for working with the penn_chime model from the command line or as importable functions. 
 
