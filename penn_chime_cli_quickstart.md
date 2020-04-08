@@ -1,4 +1,4 @@
-# code-help-desk post by @jlubken on 2020-04-08 11:18 AM
+## code-help-desk post by @jlubken on 2020-04-08 11:18 AM
 * Install the module: `pip install .`
 * Run `penn_chime --help`
 * Look at the example `cli.cfg` in `./defaults/cli.cfg`
