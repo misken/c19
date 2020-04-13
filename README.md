@@ -9,7 +9,7 @@ project:
 * [CHIME docs](https://code-for-philly.gitbook.io/chime/)
 * [Announcing CHIME blog post](http://predictivehealthcare.pennmedicine.org/2020/03/14/accouncing-chime.html)
 
-## A few of the tools and analyses I created
+## Some of my work
 
 Jump to:
 
