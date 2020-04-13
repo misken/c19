@@ -126,7 +126,7 @@ key input variables. Using my [sim_chime_scenario_runner](https://github.com/mis
 * `relative-contact-rate` : 0.05 to 0.80 in 0.05 increments
 * `infectious-days` : 8, 9, 10, 11 and 12 days
 
-[R based analysis knitted to HTML](https://drive.google.com/file/d/170-AwiHZ1l4ORhaIG-SebY-ZYJJDZmC0/view?usp=sharing)
+[R based analysis knitted to pdf](https://drive.google.com/file/d/170-AwiHZ1l4ORhaIG-SebY-ZYJJDZmC0/view?usp=sharing)
 
 ### chime_flow_resources_p1
 
