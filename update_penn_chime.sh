@@ -11,10 +11,10 @@ then
   git merge upstream/develop
   pip install . -q
 # Sync chime_sims
-  cd ../chime_sims
-  git fetch upstream
-  git checkout master
-  git merge upstream/master
+  #cd ../chime_sims
+  #git fetch upstream
+  #git checkout master
+  #git merge upstream/master
 else
   echo 'need to activate conda chime environment'
 fi

@@ -16,6 +16,7 @@ project:
 
 Jump to:
 
+* [chime_flow_resources_p2 notebook](#chime_flow_resources_p2) - a queueing based approach to census modeling in CHIME
 * [Impact of mitigation date, contact rate, infectious days on projection accuracy](#impact-of-mitigation-date-contact-rate-infectious-days-on-projection-accuracy) - scenario analysis
 * [`sim_chime_scenario_runner`](#sim_chime_scenario_runnerpy) - CHIME wrapper (Python) that can be used from command line or as importable library
 * [chime_flow_resources_p1 notebook](#chime_flow_resources_p1) - modeling principles, math and code behind the resource modeling in CHIME
@@ -139,8 +140,10 @@ The goal for this notebook is to try to help people better understand the modeli
 
 [chime_flow_resources_p1.ipynb](https://github.com/misken/c19/blob/master/mychime/modeling/chime_flow_resources_p1.ipynb)
 
-**WIP** In part 2, I'm working on a queueing model based approximation for the census distribution over time. This will allow us to include census distribution bands instead of just a deterministic point
-estimate of mean census. Still much to do but came up with nice way to model time dependent admits.
+### chime_flow_resources_p2
+
+In part 2, I developed a queueing model based approximation for the census distribution over time. This will allow us to include census distribution bands instead of just a deterministic point
+estimate of mean census. 
 
 [chime_flow_resources_p2.ipynb](https://github.com/misken/c19/blob/master/mychime/modeling/chime_flow_resources_p2.ipynb)
 
