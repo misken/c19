@@ -15,7 +15,7 @@ project:
 ## Some of my work
 
 Jump to:
-* [modeling multiple mitigation dates and relative contact rates](#dynamic_relative_contact_rates) - added functionality to `sim_chime_scenario_runner` to model relative contact rates that change over time as social distancing policies change.
+* [modeling multiple mitigation dates and relative contact rates](#dynamic-relative-contact-rates) - added functionality to `sim_chime_scenario_runner` to model relative contact rates that change over time as social distancing policies change.
 * [chime_flow_resources_p2 notebook](#chime_flow_resources_p2) - a queueing based approach to census modeling in CHIME
 * [Impact of mitigation date, contact rate, infectious days on projection accuracy](#impact-of-mitigation-date-contact-rate-infectious-days-on-projection-accuracy) - scenario analysis
 * [`sim_chime_scenario_runner`](#sim_chime_scenario_runnerpy) - CHIME wrapper (Python) that can be used from command line or as importable library
