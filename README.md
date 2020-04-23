@@ -123,6 +123,8 @@ https://www.systemdynamics.org/covid-19
 
 ### Dynamic relative contact rates
 
+**WARNING: MATH AND CODING ERRORS POSSIBLE - CHECKING - DON'T USE FOR REAL LIFE**
+
 Added ability to specify multiple mitigation dates and associated relative contact rate values.
 See [demo notebook](https://github.com/misken/sim_chime_scenario_runner/blob/master/demos/dynamic_rcr_runner.ipynb) for details. This should be useful for projecting impact of various changes in social distancing policies.
 
