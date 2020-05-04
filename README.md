@@ -58,6 +58,7 @@ Jump to:
 
 ## Other Covid19 data and simulators
 
+* https://covidtracking.com/ - state level data including testing and grades
 * https://alhill.shinyapps.io/COVID19seir/
 * https://metasd.com/2020/03/interactive-coronavirus-models/
 * https://metasd.com/2020/03/community-coronavirus-model-bozeman/
@@ -123,11 +124,10 @@ https://www.systemdynamics.org/covid-19
 
 ### Dynamic relative contact rates
 
-**WARNING: MATH AND CODING ERRORS POSSIBLE - CHECKING - DON'T USE FOR REAL LIFE**
-
 Added ability to specify multiple mitigation dates and associated relative contact rate values.
 See [demo notebook](https://github.com/misken/sim_chime_scenario_runner/blob/master/demos/dynamic_rcr_runner.ipynb) for details. This should be useful for projecting impact of various changes in social distancing policies.
 
+**WARNING** - NEEDS TESTING AND VALIDATION - IDEA SEEMS REASONABLE - USE AT YOUR OWN RISK
 
 ### Impact of mitigation date, contact rate, infectious days on projection accuracy
 

@@ -24,9 +24,9 @@ printf '\n-------------------------------\n'
 ./update_penn_chime.sh
 
 # Open a few browser tabs
-printf '\nOpen a few browser tabs\n'
-printf '\n-----------------------\n'
-xdg-open https://github.com/misken/c19
-xdg-open https://penn-chime.phl.io/
-xdg-open https://github.com/CodeForPhilly/chime/issues?q=is%3Aissue+is%3Aopen+label%3Amodels
+# printf '\nOpen a few browser tabs\n'
+# printf '\n-----------------------\n'
+# xdg-open https://github.com/misken/c19
+# xdg-open https://penn-chime.phl.io/
+# xdg-open https://github.com/CodeForPhilly/chime/issues?q=is%3Aissue+is%3Aopen+label%3Amodels
 
