@@ -6,10 +6,10 @@ project:
 
 * [Online hospital impact simulator](https://penn-chime.phl.io/)
 * [https://github.com/CodeForPhilly/chime](https://github.com/CodeForPhilly/chime)
+* [Bayes CHIME](https://github.com/pennsignals/chime_sims)
 * [CHIME docs](https://code-for-philly.gitbook.io/chime/)
 * [CHIME pub in Annals of Internal Medicine](https://annals.org/aim/fullarticle/2764423/locally-informed-simulation-predict-hospital-capacity-needs-during-covid-19)
 * [#covid19-chime-penn Slack channel](https://codeforphilly.org/chat/covid19-chime-penn)
-* [BayesCHIME](https://github.com/pennsignals/chime_sims)
 * [Announcing CHIME blog post](http://predictivehealthcare.pennmedicine.org/2020/03/14/accouncing-chime.html)
 
 ## Some of my work
@@ -40,6 +40,7 @@ Jump to:
 
 ## Articles, blog posts, vids
 
+* https://www.nytimes.com/interactive/2020/05/12/upshot/coronavirus-models.html
 * [Inside a Chicago hospital built to deal with a pandemic](https://www.washingtonpost.com/video/national/health-science/inside-a-chicago-hospital-built-to-deal-with-a-pandemic/2020/04/09/c09e900a-91af-4292-b480-4bc6946eed54_video.html)
 * [America’s most influential coronavirus model just revised its estimates downward. But not every model agrees.](https://www.washingtonpost.com/health/2020/04/06/americas-most-influential-coronavirus-model-just-revised-its-estimates-downward-not-every-model-agrees/)
 * [The IMHE COVID-19 model is fatally flawed](https://medium.com/@robertbracco1/the-ihme-covid19-model-is-dangerously-flawed-c19928464db1)
@@ -58,6 +59,7 @@ Jump to:
 
 ## Other Covid19 data and simulators
 
+* https://www.covid19sim.org/ (MIT, Ga Tech, Harvard) - Shiny App
 * https://covidtracking.com/ - state level data including testing and grades
 * https://alhill.shinyapps.io/COVID19seir/
 * https://metasd.com/2020/03/interactive-coronavirus-models/
