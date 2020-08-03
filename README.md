@@ -7,6 +7,7 @@ project:
 * [Online hospital impact simulator](https://penn-chime.phl.io/)
 * [https://github.com/CodeForPhilly/chime](https://github.com/CodeForPhilly/chime)
 * [Bayes CHIME](https://github.com/pennsignals/chime_sims)
+* [CHIME 2](https://github.com/pennsignals/CHIME-2) - appifies Bayes CHIME
 * [CHIME docs](https://code-for-philly.gitbook.io/chime/)
 * [CHIME pub in Annals of Internal Medicine](https://annals.org/aim/fullarticle/2764423/locally-informed-simulation-predict-hospital-capacity-needs-during-covid-19)
 * [#covid19-chime-penn Slack channel](https://codeforphilly.org/chat/covid19-chime-penn)
