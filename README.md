@@ -1,17 +1,32 @@
 # Resources for COVID-19 hospital impact modelling
 
-This repo is just a place to store some notes, code and other resources related to c19
-hospital impact modeling work I'm doing. Some of the work is based on the amazing CHIME
-project:
+This repo is just a place to store some links, notes, code and other resources related to c19
+hospital impact modeling work I'm doing. Some of the work is based on the CHIME
+project at UPenn.
 
-* [Online hospital impact simulator](https://penn-chime.phl.io/)
-* [https://github.com/CodeForPhilly/chime](https://github.com/CodeForPhilly/chime)
-* [Bayes CHIME](https://github.com/pennsignals/chime_sims)
-* [CHIME 2](https://github.com/pennsignals/CHIME-2) - appifies Bayes CHIME
+## CHIME related links
+
+* [Online hospital impact simulator](https://penn-chime.phl.io/) - v1.1.5 (2020-04-08) still running
+* [https://github.com/CodeForPhilly/chime](https://github.com/CodeForPhilly/chime) 
+* [Bayes CHIME](https://github.com/pennsignals/chime_sims) - all public facing activity appears ceased
 * [CHIME docs](https://code-for-philly.gitbook.io/chime/)
-* [CHIME pub in Annals of Internal Medicine](https://annals.org/aim/fullarticle/2764423/locally-informed-simulation-predict-hospital-capacity-needs-during-covid-19)
+* [CHIME pub in Annals of Internal Medicine](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC7153364/)
 * [#covid19-chime-penn Slack channel](https://codeforphilly.org/chat/covid19-chime-penn)
 * [Announcing CHIME blog post](http://predictivehealthcare.pennmedicine.org/2020/03/14/accouncing-chime.html)
+
+## Other prominent Covid-19 models
+
+### Imperial College of London
+
+* [Imperial College of London model](https://mrc-ide.github.io/covid19usa/#/)
+* [Nature paper - June 2020](https://www.nature.com/articles/s41586-020-2405-7.pdf)
+* [State level tracking in the US](https://www.medrxiv.org/content/10.1101/2020.07.13.20152355v1.full.pdf)
+
+### IHME model
+
+* [IHME - COVID-19 Projections](https://covid19.healthdata.org/projections) - paper describing methodology is [here](http://www.healthdata.org/research-article/forecasting-covid-19-impact-hospital-bed-days-icu-days-ventilator-days-and-deaths)
+* [America’s most influential coronavirus model just revised its estimates downward. But not every model agrees.](https://www.washingtonpost.com/health/2020/04/06/americas-most-influential-coronavirus-model-just-revised-its-estimates-downward-not-every-model-agrees/)
+* [The IMHE COVID-19 model is fatally flawed](https://medium.com/@robertbracco1/the-ihme-covid19-model-is-dangerously-flawed-c19928464db1)
 
 ## Some of my work
 
@@ -43,20 +58,13 @@ Jump to:
 
 * https://www.nytimes.com/interactive/2020/05/12/upshot/coronavirus-models.html
 * [Inside a Chicago hospital built to deal with a pandemic](https://www.washingtonpost.com/video/national/health-science/inside-a-chicago-hospital-built-to-deal-with-a-pandemic/2020/04/09/c09e900a-91af-4292-b480-4bc6946eed54_video.html)
-* [America’s most influential coronavirus model just revised its estimates downward. But not every model agrees.](https://www.washingtonpost.com/health/2020/04/06/americas-most-influential-coronavirus-model-just-revised-its-estimates-downward-not-every-model-agrees/)
-* [The IMHE COVID-19 model is fatally flawed](https://medium.com/@robertbracco1/the-ihme-covid19-model-is-dangerously-flawed-c19928464db1)
-* [IHME - COVID-19 Projections](https://covid19.healthdata.org/projections) - paper describing methodology is [here](http://www.healthdata.org/research-article/forecasting-covid-19-impact-hospital-bed-days-icu-days-ventilator-days-and-deaths)
 * [mathbabe post on covid-19](https://mathbabe.org/2020/03/30/comments-on-covid-19/)
 * [Coronavirus modelers factor in new public health risk: Accusations their work is a hoax](https://www.washingtonpost.com/health/2020/03/27/coronavirus-models-politized-trump/)
 * [A War Footing: Surfing the Curve](https://medium.com/swlh/a-war-footing-surfing-the-curve-f5ffe6134e37)
 * [The Flaw of Averages in Flattening the Curve](https://www.probabilitymanagement.org/blog/2020/3/19/the-flaw-of-averages-in-flattening-the-curve)
 * [A combination of coronavirus and the flaw of averages can drive you nuts](https://www.probabilitymanagement.org/blog/2020/1/30/a-combination-of-coronavirus-and-the-flaw-of-averages-can-drive-you-nuts)
 
-## Kaggle data, kernels, challenges
 
-* https://www.kaggle.com/sudalairajkumar/novel-corona-virus-2019-dataset
-* https://www.kaggle.com/allen-institute-for-ai/CORD-19-research-challenge/tasks
-...
 
 ## Other Covid19 data and simulators
 
@@ -69,59 +77,15 @@ Jump to:
 * http://covidsim.eu/
 * https://www.hsye.org/covid-19-capacity-mgmt (Healthcare Systems Engineering Institute at Northeastern U.) 
 
-## PySD
+## Systems dynamics modeling in Python
 
 Simulating SD models in Python - https://pysd.readthedocs.io/en/master/
 
 Can read Vensim .mdl files. They are just text files.
 
-### INFORMS Forum post
+## Agent based modeling in Python
 
-This post appeared in March sometime in the [INFORMS](https://www.informs.org/) daily forum.
-
------ START -----
-Multiple folks from the System Dynamics (SD) community have built models. Tom Fiddaman also made a video
-
-Tom Fiddaman's model/video
-metasd.com/2020/03/community-coronavirus-model-bozeman
-
-Jeroen Struben's model
-forio.com/app/jeroen_struben/...
-
-Tom Fiddaman's review of Struben's model
-metasd.com/2020/03/interactive-coronavirus-models
-
-Tom Fiddaman's review of Jack Homer's COVID-19 model
-metasd.com/2020/03/model-covid-19-us
-
-
-Bob Eberlein's model
-
-exchange.iseesystems.com/public/isee/covid-19-simulator/...
-https://exchange.iseesystems.com/models/player/isee/covid-19-model
-
-
-Bob Eberlein will be presenting his work this Friday, March 27th 2-3PM ET in a Worcester Polytechnic Institute (WPI) System Dynamics Collective Learning Meeting (CLM). I am waiting on details from him about the presentation. Please follow/join WPI SD for more info 
-
-twitter.com/WPISDclub
-
-www.linkedin.com/groups/1916314
-
-Below is a link to sign up to be on the WPI System Dynamics Club mailing list:
-
-eepurl.com/dzmA4j
-
-
-Wish you and yours health and happiness!
-
-Sincerely,
-
-WPI System Dynamics Social Media Manager
-
-Forgot to share the System Dynamics Society's page on COVID-19 with INFORMS folks...and I should share the INFORMS page on COVID-19 with SD folks
-https://www.systemdynamics.org/covid-19
-
------ END -----
+Mesa - https://github.com/projectmesa/mesa and https://mesa.readthedocs.io/en/master/index.html
 
 ## Some project work
 
