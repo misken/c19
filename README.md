@@ -18,9 +18,14 @@ project at UPenn.
 
 ### Imperial College of London
 
-* [Imperial College of London model](https://mrc-ide.github.io/covid19usa/#/)
+* [Main reports page](https://www.imperial.ac.uk/mrc-global-infectious-disease-analysis/covid-19/covid-19-reports/)
+* [State level model explainer page](https://mrc-ide.github.io/covid19usa/#/)
 * [Nature paper - June 2020](https://www.nature.com/articles/s41586-020-2405-7.pdf)
+* [Report 13 - Flaxman](https://www.imperial.ac.uk/mrc-global-infectious-disease-analysis/covid-19/report-13-europe-npi-impact/)
 * [State level tracking in the US](https://www.medrxiv.org/content/10.1101/2020.07.13.20152355v1.full.pdf)
+* [Source code for Report 13 state level model](https://github.com/ImperialCollegeLondon/covid19model)
+* [Source code for Report 9 microsimulation model](https://github.com/mrc-ide/covid-sim)
+* [Report 9 - Ferguson](https://www.imperial.ac.uk/mrc-global-infectious-disease-analysis/covid-19/report-9-impact-of-npis-on-covid-19/)
 
 ### IHME model
 
