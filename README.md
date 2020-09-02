@@ -14,7 +14,7 @@ project at UPenn.
 * [#covid19-chime-penn Slack channel](https://codeforphilly.org/chat/covid19-chime-penn)
 * [Announcing CHIME blog post](http://predictivehealthcare.pennmedicine.org/2020/03/14/accouncing-chime.html)
 
-## Other prominent Covid-19 models
+## Other prominent Covid-19 models and data
 
 ### Imperial College of London
 
@@ -26,6 +26,13 @@ project at UPenn.
 * [Source code for Report 13 state level model](https://github.com/ImperialCollegeLondon/covid19model)
 * [Source code for Report 9 microsimulation model](https://github.com/mrc-ide/covid-sim)
 * [Report 9 - Ferguson](https://www.imperial.ac.uk/mrc-global-infectious-disease-analysis/covid-19/report-9-impact-of-npis-on-covid-19/)
+
+### Data
+
+* [COVID-19 Data Repo by CSSE at JHU](https://github.com/CSSEGISandData/COVID-19)
+    - [Dashboard](https://www.arcgis.com/apps/opsdashboard/index.html#/bda7594740fd40299423467b48e9ecf6)
+    - [CSSE dept at JHU](https://systems.jhu.edu/)
+* [NYT Covid-19 Data in the US](https://github.com/nytimes/covid-19-data)
 
 ### IHME model
 
@@ -50,16 +57,9 @@ Jump to:
 
 ## More resources related to COVID-19 modeling and analysis
 
-### Johns Hopkins projects
 
-* [https://github.com/CSSEGISandData/COVID-19](https://github.com/CSSEGISandData/COVID-19)
-    - do git pull to get updated data including daily and time series (csv)
-    - for US can get data both at state and county level 
-    - [Dashboard](https://www.arcgis.com/apps/opsdashboard/index.html#/bda7594740fd40299423467b48e9ecf6)
-    - links to Lancet article and many data sources
-* [CSSE dept at JHU](https://systems.jhu.edu/)
 
-## Articles, blog posts, vids
+### Articles, blog posts, vids
 
 * https://www.nytimes.com/interactive/2020/05/12/upshot/coronavirus-models.html
 * [Inside a Chicago hospital built to deal with a pandemic](https://www.washingtonpost.com/video/national/health-science/inside-a-chicago-hospital-built-to-deal-with-a-pandemic/2020/04/09/c09e900a-91af-4292-b480-4bc6946eed54_video.html)
@@ -71,7 +71,7 @@ Jump to:
 
 
 
-## Other Covid19 data and simulators
+### Other Covid19 data and simulators
 
 * https://www.covid19sim.org/ (MIT, Ga Tech, Harvard) - Shiny App
 * https://covidtracking.com/ - state level data including testing and grades
@@ -82,13 +82,13 @@ Jump to:
 * http://covidsim.eu/
 * https://www.hsye.org/covid-19-capacity-mgmt (Healthcare Systems Engineering Institute at Northeastern U.) 
 
-## Systems dynamics modeling in Python
+### Systems dynamics modeling in Python
 
 Simulating SD models in Python - https://pysd.readthedocs.io/en/master/
 
 Can read Vensim .mdl files. They are just text files.
 
-## Agent based modeling in Python
+### Agent based modeling in Python
 
 Mesa - https://github.com/projectmesa/mesa and https://mesa.readthedocs.io/en/master/index.html
 
