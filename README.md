@@ -1,10 +1,18 @@
 # Resources for COVID-19 hospital impact modelling
 
 This repo is just a place to store some links, notes, code and other resources related to c19
-hospital impact modeling work I'm doing. Some of the work is based on the CHIME
-project at UPenn.
+hospital impact modeling.
+
+## COVID-19 Scenario Modeling Hub
+
+* [COVID19-ScenarioModelingHub](https://covid19scenariomodelinghub.org/index.html)
+
 
 ## CHIME related links
+
+Some of the work in this repo is based on the CHIME project at UPenn. This project does not appear to be active anymore, 
+though the online hospital impact simulator is still running.
+
 
 * [Online hospital impact simulator](https://penn-chime.phl.io/) - v1.1.5 (2020-04-08) still running
 * [https://github.com/CodeForPhilly/chime](https://github.com/CodeForPhilly/chime) 
@@ -33,6 +41,10 @@ project at UPenn.
     - [Dashboard](https://www.arcgis.com/apps/opsdashboard/index.html#/bda7594740fd40299423467b48e9ecf6)
     - [CSSE dept at JHU](https://systems.jhu.edu/)
 * [NYT Covid-19 Data in the US](https://github.com/nytimes/covid-19-data)
+
+### Papers
+
+* [From predictions to prescriptions: Data driven response to Covid-19 (Bersimas, et al)](https://arxiv.org/pdf/2006.16509.pdf)
 
 ### IHME model
 
