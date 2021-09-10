@@ -19,9 +19,9 @@ cd ${C19_HOME}
 
 # Run script to update penn_chime software and copy 
 # src files and settings files to their appropriate destinations
-printf '\nGet updated penn_chime software\n'
-printf '\n-------------------------------\n'
-./update_penn_chime.sh
+#printf '\nGet updated penn_chime software\n'
+#printf '\n-------------------------------\n'
+#./update_penn_chime.sh
 
 # Open a few browser tabs
 # printf '\nOpen a few browser tabs\n'

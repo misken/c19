@@ -6,7 +6,17 @@ hospital impact modeling.
 ## COVID-19 Scenario Modeling Hub
 
 * [COVID19-ScenarioModelingHub](https://covid19scenariomodelinghub.org/index.html)
+* [ScenarioHub GitHub site](https://github.com/midas-network/covid19-scenario-modeling-hub)
 
+This site has numerous teams submitting long term (3-6 months) forecasts that are them combined to create an ensemble forecast.
+Anyone can join. Since longer term forecasts are more susceptible to changes in policy and behavior (both virus and human), this site takes a scenario approach. Often four distinct scenarios are proposed and the modelers submit forecasts for each. The scenarios might involve things like vaccine uptake and NPI use.
+
+## COVID-19 Forecast Hub
+
+* [COVID19-Forecast Hub](https://covid19forecasthub.org/)
+* [Forecast Hub GitHub site](https://github.com/reichlab/covid19-forecast-hub)
+
+This is another forecast aggregation site but with a focus on short term forecasts of cases, deaths and hospitalizations across the US. Numerous infectious modeling teams participate.
 
 ## CHIME related links
 
