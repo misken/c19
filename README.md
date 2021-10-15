@@ -3,6 +3,21 @@
 This repo is just a place to store some links, notes, code and other resources related to c19
 hospital impact modeling.
 
+## Reflections on modeling and analysis of the pandemic
+
+In Oct of 2021, this article appeared in MIT Technology Review:
+
+* [Reimagining our pandemic problems with the mindset of an engineer](https://www.technologyreview.com/2021/10/15/1037195/engineering-epidemiology-pandemic-problem-solving/)
+
+I love this quote from above article:
+
+> He envisions research results that come not only with exhortations that “People should do this!” but also with accessible software allowing others to tinker with the tools. But for the most part, he says, epidemiologists do research, not development: “We write software, and it’s usually pretty bad, but it gets the job done. And then we write the paper, and then it's up to somebody else—some imagined other person—to make it useful in the broader context. And then that never happens. We’ve seen these failures in the context of the pandemic.”
+
+The article above is based partially on this recent paper arguing for the need to better account for various flavors of uncertainty (stochastic, parameter and model) when doing pandemic modeling and analysis - Jon Zelner, Julien Riou, Ruth Etzioni, and Andrew Gelman.
+
+* [Accounting for uncertainty during a pandemic](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC8361691/ ())
+
+
 ## COVID-19 Scenario Modeling Hub
 
 * [COVID19-ScenarioModelingHub](https://covid19scenariomodelinghub.org/index.html)
